@@ -1,291 +1,335 @@
-## Information
+# 🦊 Foxy Bot
+
+> Bot WhatsApp Modern dengan TypeScript — Modular, Ringan, dan Mudah Dikembangkan.
 
 <div align="center">
-<a href="https://github.com/nazedev/hitori/watchers"><img title="Watchers" src="https://img.shields.io/github/watchers/nazedev/hitori?label=Watchers&color=green&style=flat-square"></a>
-<a href="https://github.com/nazedev/hitori/network/members"><img title="Forks" src="https://img.shields.io/github/forks/nazedev/hitori?label=Forks&color=blue&style=flat-square"></a>
-<a href="https://github.com/nazedev/hitori/stargazers"><img title="Stars" src="https://img.shields.io/github/stars/nazedev/hitori?label=Stars&color=yellow&style=flat-square"></a>
-<a href="https://github.com/nazedev/hitori/issues"><img title="Issues" src="https://img.shields.io/github/issues/nazedev/hitori?label=Issues&color=success&style=flat-square"></a>
-<a href="https://github.com/nazedev/hitori/issues?q=is%3Aissue+is%3Aclosed"><img title="Issues" src="https://img.shields.io/github/issues-closed/nazedev/hitori?label=Issues&color=red&style=flat-square"></a>
-<a href="https://github.com/nazedev/hitori/pulls"><img title="Pull Request" src="https://img.shields.io/github/issues-pr/nazedev/hitori?label=PullRequest&color=success&style=flat-square"></a>
-<a href="https://github.com/nazedev/hitori/pulls?q=is%3Apr+is%3Aclosed"><img title="Pull Request" src="https://img.shields.io/github/issues-pr-closed/nazedev/hitori?label=PullRequest&color=red&style=flat-square"></a>
+  <img src="https://img.shields.io/badge/Version-2.0.0-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/TypeScript-5.7-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Node.js-20+-339933?style=for-the-badge&logo=node.js" alt="Node.js">
+  <img src="https://img.shields.io/badge/Baileys-7.0.0--rc.9-green?style=for-the-badge" alt="Baileys">
+  <img src="https://img.shields.io/badge/License-MIT-orange?style=for-the-badge" alt="License">
 </div>
 
-This script is created by [Nazedev](https://github.com/nazedev) using Node.js and the [WhiskeySocket/Baileys](https://github.com/WhiskeySockets/Baileys) library. The script is currently in the development phase (BETA), so there may still be some errors that can be ignored. If errors persist even after debugging, please contact the owner for assistance. ~ By Naze
+---
 
-#### Join Group
-[![Grup WhatsApp](https://img.shields.io/badge/WhatsApp%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/EApQZ65s9wF1UG5nD6Pinm?mode=gi_t) 
+## 📖 Tentang
+
+Foxy Bot adalah bot WhatsApp yang dibuat menggunakan **Baileys** dan **TypeScript**. Proyek ini merupakan pengembangan ulang (fork) dari [nazedev/hitori](https://github.com/nazedev/hitori) dengan arsitektur yang lebih modern dan modular.
+
+Semua fitur/command telah dipisahkan ke dalam file **plugin** terpisah, sehingga mudah untuk menambah, menghapus, atau memodifikasi fitur tanpa mengacaukan kode utama.
 
 ---
-## 📦 Requirements
 
-Minimum requirements:
-- **Node.js** v20 or higher
+## ✨ Fitur Utama
+
+| Kategori | Jumlah Fitur | Keterangan |
+|----------|:------------:|------------|
+| 🤖 Bot | 25+ | Profile, runtime, status, jadibot, afk, rvo, inspect, dll |
+| 👥 Group | 18+ | Add, kick, promote, demote, warn, link, tagall, settings, dll |
+| 🛠️ Tools | 35+ | Sticker, converter (toaudio, toimage, togif, dll), HD, QR, translate, dll |
+| 📥 Downloader | 8 | YouTube, Instagram, TikTok, Facebook, Spotify, Mediafire |
+| 🔍 Search | 15+ | Google Image, Pinterest, Spotify Search, WA Stalk, GitHub Stalk, dll |
+| 🧠 AI | 4 | Gemini, Grok, Claude, DeepSeek R1 |
+| 🎮 Fun | 20+ | Quotes, random, dadu, halah, cek sifat, jodoh, dll |
+| 📋 Menu | 15+ | Allmenu, category menu, total fitur, script, donasi |
+| 👑 Owner | 30+ | Shutdown, update, ban, premium, settings, backup, dll |
+
+> **Total: 160+ fitur** yang siap pakai!
+
+---
+
+## 📋 Persyaratan Sistem
+
+- **Node.js** versi 20 atau lebih baru
 - **Git**
-
-System dependencies (handled automatically by `install.sh`):
-- ffmpeg
-- imagemagick
-- yarn / npm
+- **FFmpeg** (untuk fitur converter audio/video/sticker)
+- **RAM minimal 512MB** (rekomendasi 1GB+)
 
 ---
-## 🚀 Installation
-### 1️⃣ Clone Repository
-```bash
-git clone https://github.com/nazedev/hitori
-cd hitori
-```
----
-### 2️⃣ Automatic Installation (Recommended)
+
+## 🚀 Instalasi
+
+### 1. Clone Repository
 
 ```bash
-bash install.sh
+git clone https://github.com/bradarshome/foxy-bot.git
+cd foxy-bot
 ```
 
-This script will:
-- Detect your package manager (`pkg`, `apt`, `dnf`, etc.)
-- Install required system dependencies
-- Install Node.js packages
-- Start the bot automatically
-
----
-## 📱 Termux (Android)
-```bash
-pkg update && pkg upgrade
-pkg install git
-pkg install nodejs
-pkg install ffmpeg
-pkg install imagemagick
-git clone https://github.com/nazedev/hitori
-cd hitori
-npm install
-```
-[ RECOMMENDED INSTALL ON TERMUX ]
-```bash
-pkg install yarn
-yarn
-```
-Use **yarn**:
-
-```bash
-yarn install
-yarn start
-```
-
-> Make sure `nodejs` and `yarn` are installed. The `install.sh` script already handles this.
-
----
-## 💻 Laptop / Ubuntu / VPS / SSH
-* Download And Install Git [`Click Here`](https://git-scm.com/downloads)
-* Download And Install NodeJS [`Click Here`](https://nodejs.org/en/download)
-* Download And Install FFmpeg [`Click Here`](https://ffmpeg.org/download.html) (**Don't Forget Add FFmpeg to PATH enviroment variables**)
-* Download And Install ImageMagick [`Click Here`](https://imagemagick.org/script/download.php)
-
-Use **npm**:
+### 2. Install Dependencies
 
 ```bash
 npm install
-npm start
 ```
----
-## ▶️ Running the Bot
+
+### 3. Setup Konfigurasi
+
+Salin file contoh konfigurasi dan edit sesuai kebutuhan:
 
 ```bash
-npm start
-# or
-yarn start
+cp settings.example.js settings.js
 ```
 
-Scan the QR Code or use Pairing Code, and the bot is ready to use.
+Edit file `settings.js` dan ubah bagian berikut:
 
----
+```js
+global.owner = ["628xxxxxxxxxx"]     // Nomor owner (bisa lebih dari 1)
+global.number_bot = "628xxxxxxxxxx"  // Nomor bot untuk pairing
+global.botname = "Foxy Bot"          // Nama bot
+global.author = "Foxy Bot"           // Author sticker
+global.packname = "Bot WhatsApp"     // Packname sticker
+```
 
-## 🌐 API Integration
+Untuk fitur berbasis API (AI, downloader, tools), dapatkan API key dari:
+- **Naze API**: https://naze.biz.id/profile
+- **Neosantara AI**: https://app.neosantara.xyz/api-keys
 
-This bot is fully integrated with the **Naze API Service**:
-
-🔗 https://naze.biz.id
-
-Many features (such as downloader, AI tools, utilities, and media processing) rely on this external API.
-
-### API Key Requirement
-
-To use all features properly, you **must provide your own API key**.
-
-The API key is configured in:
-
-📁 **[settings.js](https://github.com/nazedev/hitori/blob/master/settings.js)**  
-
-Example configuration:
+Lalu masukkan ke `settings.js`:
 
 ```js
 global.APIKeys = {
-  'https://api.naze.biz.id': 'YOUR_API_KEY_HERE'
+  'https://api.naze.biz.id': 'nz-xxxxx',
+  'https://api.neosantara.xyz/v1': 'nsk_xxxxx',
 }
 ```
 
-⚠️ If the API key is invalid or not set:
-- Some commands will not work
-- API-based features may return errors
+### 4. Jalankan Bot
 
-Make sure you register and obtain a valid API key from the official website before using the bot.
-
----
-## ⚙️ Bot Configuration
-
-All main configurations are located in:
-
-📁 **[settings.js](https://github.com/nazedev/hitori/blob/master/settings.js)**
-
-### Editable Settings
-
-#### Owner Number
-```js
-global.owner = ['628xxxxxxxxxx']
+**Mode Development** (auto-reload saat ada perubahan kode):
+```bash
+npm run dev
 ```
 
-#### Bot Identity
-```js
-global.botname = 'Hitori Bot'
-global.author = 'Nazedev'
+**Mode Production** (setelah build):
+```bash
+npm run build
+npm start
 ```
 
-#### Command Prefix
-```js
-global.listprefix = ['!', '.', '+']
-```
-
-#### User Limits & Balance
-```js
-global.limit.free = 20
-global.money.free = 10000
-```
-
-#### Pairing Code / Bot Number
-```js
-global.pairing_code = true
-global.number_bot = '628xxxxxxxxxx'
-```
-
-> Any change in [settings.js](https://github.com/nazedev/hitori/blob/master/settings.js) will be **auto-reloaded** without restarting the bot.
+Saat pertama kali dijalankan, bot akan meminta nomor WhatsApp untuk pairing. Masukkan nomor dengan format kode negara (contoh: `628xxxxxxxxxx`). Kode pairing akan ditampilkan di terminal.
 
 ---
 
-## 🧩 Editing & Adding Features
+## 📂 Struktur Proyek
 
-All bot features are implemented in:
-
-📁 **[naze.js](https://github.com/nazedev/hitori/blob/master/naze.js)**
-
-Look for the **[switch (command)](https://github.com/nazedev/hitori/blob/61052a01ea8e8975a99f0db7f5d40bad5ee39a5b/naze.js#L742)** section.
-
-### Where to Add New Features
-
-Add or edit commands inside the [switch (command)](https://github.com/nazedev/hitori/blob/61052a01ea8e8975a99f0db7f5d40bad5ee39a5b/naze.js#L742) block.
-
-### Example: Adding a New Command
-
-```js
-case 'ping': {
-  reply('pong 🏓')
-}
-break
 ```
-
-Guidelines:
-- Always add new commands using `case`
-- Do not remove the main switch structure
-- Place feature logic inside each `case`
-
----
-
-## 🔌 Connector & Core Handler
-
-To understand the WhatsApp connection flow and event handling, see:
-
-📁 **[index.js](https://github.com/nazedev/hitori/blob/master/index.js)**
-This file is responsible for:
-- Initializing Baileys connection
-- Handling WhatsApp events
-- Loading [settings.js](https://github.com/nazedev/hitori/blob/master/settings.js)
-- Dispatching messages to [naze.js](https://github.com/nazedev/hitori/blob/master/naze.js)
-
-⚠️ **Editing [index.js](https://github.com/nazedev/hitori/blob/master/index.js) is not recommended unless you fully understand the bot flow.**
-
----
-## 🗂 Structure Project
-```
-├── Dockerfile
-├── LICENSE
-├── Procfile
-├── README.md
-├── app.json
-├── database
-│   ├── jadibot
-│   │   └── Naze
-│   └── temp
-│       └── A
-├── docker-compose.yml
-├── heroku.yml
-├── index.js
-├── install.sh
-├── lib
-│   ├── converter.js
-│   ├── exif.js
-│   ├── function.js
-│   ├── game.js
-│   ├── math.js
-│   ├── template_menu.js
-│   ├── tictactoe.js
-│   └── uploader.js
-├── naze.js
-├── nodemon.json
+foxy-bot/
+├── src/
+│   ├── core/              # Inti sistem bot
+│   │   ├── config.ts          # Loader konfigurasi dari settings.js
+│   │   ├── database-manager.ts # Manajemen database & settings
+│   │   ├── plugin-system.ts   # Sistem plugin & command router
+│   │   ├── serializer.ts      # Message serializer & event handler
+│   │   └── server.ts          # Express server
+│   ├── plugins/           # Semua fitur/command bot
+│   │   ├── owner/             # Command khusus owner
+│   │   ├── group/             # Command manajemen grup
+│   │   ├── bot/               # Command umum bot
+│   │   ├── tools/             # Tools & converter
+│   │   ├── ai/                # AI chat
+│   │   ├── search/            # Pencarian & stalk
+│   │   ├── downloader/        # Download media
+│   │   ├── fun/               # Fitur hiburan
+│   │   └── menu/              # Menu & help
+│   ├── database/          # Database layer
+│   │   ├── repository.ts      # JSON & MongoDB repository
+│   │   └── commands.ts        # Fungsi command & premium
+│   ├── types/             # Definisi tipe TypeScript
+│   └── utils/             # Fungsi utilitas (logger, helpers)
+│   └── index.ts           # Entry point utama
+├── lib/                 # Library helper (CommonJS)
+│   ├── converter.js         # Konversi media
+│   ├── exif.js              # EXIF handler
+│   ├── function.js          # Fungsi umum
+│   ├── game.js              # Sistem game & ekonomi
+│   ├── scraper.js           # Web scraper
+│   └── uploader.js          # Upload media
+├── database/            # Data bot (auto-generated)
+│   └── temp/                # File temporary
+├── settings.js          # Konfigurasi utama (JANGAN di-commit!)
+├── settings.example.js  # Template konfigurasi
 ├── package.json
-├── railway.json
-├── replit.nix
-├── settings.js
-├── speed.py
-├── src
-│   ├── antispam.js
-│   ├── database.js
-│   ├── jadibot.js
-│   ├── media
-│   │   ├── fake.pdf
-│   │   └── naze.png
-│   ├── message.js
-│   └── server.js
-└── start.js
+└── tsconfig.json
 ```
----
-#### Deploy to Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nazedev/hitori)
 
-#### Heroku Buildpack
-| Build Pack | LINK |
+---
+
+## 🧩 Menambah Fitur Baru
+
+Semua command bot berada di folder `src/plugins/`. Untuk menambah fitur baru:
+
+### 1. Buat file plugin baru
+
+Misalnya, buat file `src/plugins/tools/contoh.ts`:
+
+```typescript
+import type { PluginCommand } from '../../core/plugin-system.js';
+
+export const commands: PluginCommand[] = [
+  {
+    name: 'contoh',
+    aliases: ['example'],
+    description: 'Contoh command baru',
+    category: 'Tools',
+    limit: 1,
+    handler: async ({ message, text, db }) => {
+      if (!text) return message.reply('Masukkan teksnya!');
+      message.reply(`Kamu mengetik: ${text}`);
+    },
+  },
+];
+```
+
+### 2. Daftarkan di index folder
+
+Edit `src/plugins/tools/index.ts`:
+
+```typescript
+import { commands as contohCommands } from './contoh.js';
+
+export const commands: PluginCommand[] = [
+  ...toolsBasic,
+  ...contohCommands,  // Tambahkan ini
+];
+```
+
+### 3. Jalankan ulang bot
+
+```bash
+npm run dev
+```
+
+Command baru akan otomatis terdaftar dan muncul di menu!
+
+---
+
+## ⚙️ Konfigurasi
+
+Semua pengaturan ada di **`settings.js`**. Setiap perubahan akan otomatis ter-load tanpa perlu restart bot.
+
+| Setting | Tipe | Keterangan |
+|---------|------|------------|
+| `global.owner` | Array | Nomor owner (format: `628xxx`) |
+| `global.botname` | String | Nama bot |
+| `global.author` | String | Author sticker |
+| `global.packname` | String | Packname sticker |
+| `global.listprefix` | Array | Daftar prefix command |
+| `global.pairing_code` | Boolean | Gunakan pairing code (true/false) |
+| `global.number_bot` | String | Nomor bot untuk pairing |
+| `global.limit` | Object | Limit per role (free/premium/vip) |
+| `global.money` | Object | Uang per role |
+| `global.APIs` | Object | URL API |
+| `global.APIKeys` | Object | API Key |
+| `global.badWords` | Array | Daftar kata toxic |
+| `global.timezone` | String | Zona waktu (contoh: `Asia/Jakarta`) |
+
+---
+
+## 🗄️ Database
+
+Foxy Bot mendukung dua jenis penyimpanan database:
+
+### JSON File (Default)
+Data disimpan di file `database/database.json`. Cocok untuk penggunaan personal.
+
+### MongoDB
+Untuk penggunaan skala besar atau multi-instance. Ubah `tempatDB` dan `tempatStore` di `settings.js` ke URL MongoDB:
+
+```js
+global.tempatDB = 'mongodb+srv://user:pass@cluster.mongodb.net/foxybot'
+global.tempatStore = 'mongodb+srv://user:pass@cluster.mongodb.net/foxybot-store'
+```
+
+---
+
+## 📝 Command Owner Penting
+
+| Command | Fungsi |
+|---------|--------|
+| `.shutdown` / `.off` | Matikan bot |
+| `.update` / `.upgrade` | Update bot |
+| `.setbio <teks>` | Ubah bio/status bot |
+| `.setppbot` (reply gambar) | Ubah foto profil bot |
+| `.join <link>` | Join grup via link |
+| `.leave` | Keluar dari grup saat ini |
+| `.ban <nomor>` | Ban user |
+| `.unban <nomor>` | Unban user |
+| `.addprem <nomor\|waktu>` | Tambah premium |
+| `.delprem <nomor>` | Hapus premium |
+| `.addowner <nomor>` | Tambah owner |
+| `.delowner <nomor>` | Hapus owner |
+| `.backup all` | Backup semua data |
+| `.backup database` | Backup database |
+| `.delsession true` | Hapus file session |
+| `.delsampah true` | Hapus file temporary |
+| `.runtime set` | Cek semua pengaturan bot |
+| `.runtime mode public` | Set mode bot ke public |
+
+---
+
+## 🔧 NPM Scripts
+
+| Script | Fungsi |
 |--------|--------|
-| **NODEJS** | heroku/nodejs |
-| **FFMPEG** | [here](https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest) |
-| **IMAGEMAGICK** | [here](https://github.com/DuckyTeam/heroku-buildpack-imagemagick) |
+| `npm run dev` | Development mode (auto-reload) |
+| `npm run build` | Compile TypeScript ke JavaScript |
+| `npm start` | Jalankan versi production |
+| `npm run typecheck` | Cek error TypeScript tanpa build |
 
 ---
-### Features
-| Menu     | Bot | Group | Search | Download | Tools | Ai | Game | Fun | Owner |
-| -------- | --- | ----- | ------ | -------- | ----- | -- | ---- | --- | ----- |
-| Work     |  ✅  |   ✅   |    ✅    |     ✅     |   ✅   | ✅ |   ✅   |  ✅  |    ✅    |
 
+## 🐛 Troubleshooting
 
-License: [MIT](https://choosealicense.com/licenses/mit/)
+### Bot tidak bisa connect
+- Pastikan nomor WhatsApp yang dimasukkan benar (format: `628xxx`)
+- Hapus folder `foxy-session/` lalu jalankan ulang
+- Pastikan koneksi internet stabil
 
-#### Support Me
+### FFmpeg tidak ditemukan
+Install FFmpeg:
+```bash
+# Ubuntu/Debian
+sudo apt install ffmpeg
+
+# Windows (via winget)
+winget install Gyan.FFmpeg
+
+# macOS (via brew)
+brew install ffmpeg
+```
+
+### Fitur API tidak bekerja
+- Pastikan API key sudah benar di `settings.js`
+- Cek status API di https://naze.biz.id
+- Pastikan kuota API masih tersedia
+
+### Error saat build
+```bash
+rm -rf dist/
+npm run build
+```
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
+
+---
+
+## 🤝 Kontributor
+
+| [![NazeDev](https://github.com/nazedev.png?size=100)](https://github.com/nazedev) | [![Zaynn](https://github.com/ZaynRcK.png?size=100)](https://github.com/ZaynRcK) |
+|:---:|:---:|
+| [NazeDev](https://github.com/nazedev) — Pembuat Hitori | [Zaynn](https://github.com/ZaynRcK) — Penyedia Layanan API |
+
+---
+
+## 💖 Support
+
+Jika kamu merasa proyek ini bermanfaat, kamu bisa mendukung melalui:
 - [Saweria](https://saweria.co/naze)
 
-## Contributor
+---
 
-- [NazeDev](https://github.com/nazedev) (Pembuat)
-- [Zaynn](https://github.com/ZaynRcK) (Penyedia Layanan API)
-- [Dani](https://github.com/nazedev) (Penyumbang Code)
-
-## Thanks to
-
-| [![Nazedev](https://github.com/nazedev.png?size=100)](https://github.com/nazedev) | [![Zaynn](https://github.com/ZaynRcK.png?size=100)](https://github.com/ZaynRcK) | [![Dani](https://github.com/nazedev.png?size=100)](https://github.com/nazedev) | [![WhiskeySockets](https://github.com/WhiskeySockets.png?size=100)](https://github.com/WhiskeySockets) |
-| --- | --- | --- | --- |
-| [NazeDev](https://github.com/nazedev) | [Zaynn](https://github.com/ZaynRcK) | [Dani](https://github.com/dani) | [WhiskeySockets](https://github.com/WhiskeySockets) |
+> **Catatan:** Proyek ini dibuat untuk tujuan pembelajaran. Gunakan dengan bijak dan bertanggung jawab.
