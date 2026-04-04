@@ -64,11 +64,13 @@ npm install
 
 ### 3. Setup Konfigurasi
 
-Salin file contoh konfigurasi dan edit sesuai kebutuhan:
+Buat file `settings.js` dengan menyalin dari template:
 
 ```bash
 cp settings.example.js settings.js
 ```
+
+> **Penting:** File `settings.js` tidak disertakan di repository karena berisi data sensitif (API key, nomor owner). Kamu harus membuatnya sendiri dari `settings.example.js`.
 
 Edit file `settings.js` dan ubah bagian berikut:
 
