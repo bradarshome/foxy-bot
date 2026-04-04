@@ -11,6 +11,12 @@ nazedev/
 
 # Settings (contains API keys)
 settings.js
+settings.js.bak
+
+# Old JS files (migrated to TypeScript)
+index.js
+start.js
+naze.js
 
 # Database
 database/*.json
