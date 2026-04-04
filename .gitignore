@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Session files
+foxy-session/
+nazedev/
+*.session
+
+# Settings (contains API keys)
+settings.js
+
+# Database
+database/*.json
+database/*.bak
+database/temp/*
+!database/temp/.gitkeep
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Backup & Update
+backup_before_update/
+update.zip/
+update_temp/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+*.pem
+*.key

@@ -1,74 +1,78 @@
 {
-  "name": "hitori",
-  "version": "1.1.7",
-  "description": "Bot WhatsApp Using Lib Baileys Multi Device",
+  "name": "foxy-bot",
+  "version": "2.0.0",
+  "description": "Modern WhatsApp Bot Using Baileys Multi Device - TypeScript Edition",
   "keywords": [
     "whatsapp-bot",
     "baileys-md",
     "bot-wa",
-    "multi-device"
+    "multi-device",
+    "typescript",
+    "foxy-bot"
   ],
-  "author": "Nazedev",
+  "author": "Bradar",
   "license": "MIT",
-  "homepage": "https://github.com/nazedev/hitori#readme",
-  "bugs": {
-    "url": "https://github.com/nazedev/hitori/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nazedev/hitori.git"
-  },
-  "type": "commonjs",
-  "main": "start.js",
+  "type": "module",
+  "main": "dist/index.js",
   "directories": {
-    "lib": "lib",
-    "src": "src"
+    "lib": "src"
   },
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
-    "start": "node start.js",
-    "dev": "nodemon index.js",
-    "debug": "DEBUG=* node start.js"
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "debug": "DEBUG=* tsx watch src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo 'No linter configured yet'"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.0",
     "awesome-phonenumber": "^4.4.0",
-    "axios": "^0.24.0",
-    "baileys": "latest",
-    "chalk": "^4.1.2",
+    "axios": "^1.7.0",
+    "baileys": "7.0.0-rc.9",
+    "chalk": "^5.3.0",
     "cheerio": "^1.0.0-rc.10",
     "chess.js": "^1.2.0",
     "express": "^4.18.2",
-    "file-type": "^16.5.3",
+    "file-type": "^19.0.0",
     "filesize": "^10.0.7",
     "fluent-ffmpeg": "^2.1.2",
     "form-data": "^4.0.5",
     "fs-extra": "^11.3.3",
     "human-readable": "^0.2.1",
-    "jimp": "^0.16.2",
+    "jimp": "^1.6.0",
     "moment-timezone": "^0.5.43",
-    "mongoose": "^7.3.4",
+    "mongoose": "^8.0.0",
     "ms": "^2.1.3",
     "node-cache": "^5.1.2",
     "node-cron": "^3.0.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.3.0",
     "node-webpmux": "^3.2.0",
     "performance-now": "^2.1.0",
     "pino": "^8.8.0",
+    "pino-pretty": "^11.0.0",
     "qrcode": "^1.5.4",
     "qrcode-terminal": "^0.12.0",
     "unzipper": "^0.12.3",
+    "winston": "^3.11.0",
     "yt-search": "^2.10.4",
-    "ytdl-core": "npm:@distube/ytdl-core@latest"
+    "ytdl-core": "npm:@distube/ytdl-core@latest",
+    "zod": "^3.23.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
-  },
-  "overrides": {
-    "baileys": {
-      "jimp": "^0.16.2"
-    }
+    "@types/express": "^5.0.0",
+    "@types/fluent-ffmpeg": "^2.1.0",
+    "@types/fs-extra": "^11.0.0",
+    "@types/ms": "^0.7.0",
+    "@types/node": "^22.0.0",
+    "@types/node-cron": "^3.0.0",
+    "@types/qrcode": "^1.5.0",
+    "@types/qrcode-terminal": "^0.12.0",
+    "@types/unzipper": "^0.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
   }
 }
