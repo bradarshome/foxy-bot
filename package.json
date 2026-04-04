@@ -26,6 +26,9 @@
     "dev": "tsx watch src/index.ts",
     "debug": "DEBUG=* tsx watch src/index.ts",
     "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck && npm run test:plugins",
+    "test:plugins": "tsx scripts/test-plugins.ts",
+    "test:api": "tsx scripts/telegram.ts --stdin",
     "lint": "echo 'No linter configured yet'"
   },
   "dependencies": {

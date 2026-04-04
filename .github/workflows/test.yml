@@ -1,0 +1,52 @@
+name: 🦊 Plugin Health Check
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: ['*']
+
+jobs:
+  test:
+    name: Plugin & API Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: TypeScript typecheck
+        run: npm run typecheck
+        continue-on-error: true
+
+      - name: Build check
+        run: npm run build
+
+      - name: Plugin health check
+        id: plugin-test
+        run: npm run test:plugins || echo "TEST_FAILED=true" >> $GITHUB_ENV
+        continue-on-error: true
+
+      - name: Send Telegram notification on error
+        if: env.TEST_FAILED == 'true'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          if [ -f test-results.md ]; then
+            REPORT=$(cat test-results.md)
+            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              -H "Content-Type: application/json" \
+              -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"🦊 Foxy Bot — Test Gagal\n\n❌ Plugin/API error di commit \`${GITHUB_SHA}\`\n\n${REPORT}\n\n🔗 Full log: https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\",\"parse_mode\":\"Markdown\",\"disable_web_page_preview\":true}"
+          fi
