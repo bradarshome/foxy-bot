@@ -446,6 +446,7 @@ async function loadPluginHandler(socket: WASocket, m: any, store: any, db: any):
       const downloaderPlugins = await import('../plugins/downloader/index.js');
       const funPlugins = await import('../plugins/fun/index.js');
       const menuPlugins = await import('../plugins/menu/index.js');
+      const gamePlugins = await import('../plugins/game/index.js');
 
       loadPlugins(ownerPlugins);
       loadPlugins(groupPlugins);
@@ -456,6 +457,7 @@ async function loadPluginHandler(socket: WASocket, m: any, store: any, db: any):
       loadPlugins(downloaderPlugins);
       loadPlugins(funPlugins);
       loadPlugins(menuPlugins);
+      loadPlugins(gamePlugins);
 
       console.log(`[Plugin] Loaded ${getAllCommands().length} commands`);
     } catch (error) {

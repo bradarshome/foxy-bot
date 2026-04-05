@@ -4,7 +4,7 @@ import type { PluginCommand } from '../../core/plugin-system.js';
 export const commands: PluginCommand[] = [
   {
     name: 'addsewa',
-    aliases: ['sewa'],
+    aliases: ["sewa"],
     description: 'Add group to sewa list',
     category: 'Owner',
     ownerOnly: true,
@@ -69,7 +69,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'addpr',
-    aliases: ['addprem', 'addpremium'],
+    aliases: ["addprem", "addpremium"],
     description: 'Add user to premium',
     category: 'Owner',
     ownerOnly: true,
@@ -97,7 +97,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'delpr',
-    aliases: ['delprem', 'delpremium'],
+    aliases: ["delprem", "delpremium"],
     description: 'Remove user from premium',
     category: 'Owner',
     ownerOnly: true,
@@ -121,7 +121,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'listpr',
-    aliases: ['listprem', 'listpremium'],
+    aliases: ["listprem", "listpremium"],
     description: 'List all premium users',
     category: 'Owner',
     ownerOnly: true,

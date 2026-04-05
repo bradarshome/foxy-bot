@@ -5,7 +5,7 @@ import path from 'path';
 export const commands: PluginCommand[] = [
   {
     name: 'setmessbot',
-    aliases: ['setbotmessages'],
+    aliases: ["setbotmessages"],
     description: 'Set bot message language',
     category: 'Owner',
     ownerOnly: true,
@@ -22,7 +22,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setlimitbot',
-    aliases: ['setbotlimit'],
+    aliases: ["setbotlimit"],
     description: 'Set bot limit per role',
     category: 'Owner',
     ownerOnly: true,
@@ -37,7 +37,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setmoneybot',
-    aliases: ['setbotmoney'],
+    aliases: ["setbotmoney"],
     description: 'Set bot money per role',
     category: 'Owner',
     ownerOnly: true,
@@ -52,7 +52,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setnamebot',
-    aliases: ['setbotname'],
+    aliases: ["setbotname"],
     description: 'Set bot name',
     category: 'Owner',
     ownerOnly: true,
@@ -68,7 +68,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setpacknamebot',
-    aliases: ['setbotpackname'],
+    aliases: ["setbotpackname"],
     description: 'Set sticker packname',
     category: 'Owner',
     ownerOnly: true,
@@ -84,7 +84,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setauthorbot',
-    aliases: ['setbotauthor'],
+    aliases: ["setbotauthor"],
     description: 'Set sticker author',
     category: 'Owner',
     ownerOnly: true,
@@ -100,7 +100,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setlocale',
-    aliases: ['setlocalebot', 'setbotlocale'],
+    aliases: ["setlocalebot", "setbotlocale"],
     description: 'Set bot locale',
     category: 'Owner',
     ownerOnly: true,
@@ -118,7 +118,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'settimezone',
-    aliases: ['settimezonebot', 'setbottimezone'],
+    aliases: ["settimezonebot", "setbottimezone"],
     description: 'Set bot timezone',
     category: 'Owner',
     ownerOnly: true,
@@ -136,7 +136,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setapikey',
-    aliases: ['setbotapikey'],
+    aliases: ["setbotapikey"],
     description: 'Set API key',
     category: 'Owner',
     ownerOnly: true,
@@ -172,7 +172,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'delprefix',
-    aliases: ['removeprefix'],
+    aliases: ["removeprefix"],
     description: 'Remove prefix',
     category: 'Owner',
     ownerOnly: true,
@@ -188,7 +188,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'addtoxic',
-    aliases: ['addbadword'],
+    aliases: ["addbadword"],
     description: 'Add bad word',
     category: 'Owner',
     ownerOnly: true,
@@ -204,7 +204,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'deltoxic',
-    aliases: ['delbadword'],
+    aliases: ["delbadword"],
     description: 'Remove bad word',
     category: 'Owner',
     ownerOnly: true,

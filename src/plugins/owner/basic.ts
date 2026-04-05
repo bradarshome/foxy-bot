@@ -7,7 +7,7 @@ import { updateSettings } from '../../../lib/function.cjs';
 export const commands: PluginCommand[] = [
   {
     name: 'shutdown',
-    aliases: ['off'],
+    aliases: ["off"],
     description: 'Shutdown bot',
     category: 'Owner',
     ownerOnly: true,
@@ -18,7 +18,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'update',
-    aliases: ['upgrade'],
+    aliases: ["upgrade"],
     description: 'Update bot',
     category: 'Owner',
     ownerOnly: true,
@@ -118,7 +118,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'block',
-    aliases: ['blokir'],
+    aliases: ["blokir"],
     description: 'Block a user',
     category: 'Owner',
     ownerOnly: true,
@@ -131,7 +131,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'unblock',
-    aliases: ['unblokir', 'openblokir', 'openblock'],
+    aliases: ["unblokir", "openblokir", "openblock"],
     description: 'Unblock a user',
     category: 'Owner',
     ownerOnly: true,

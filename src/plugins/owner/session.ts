@@ -72,7 +72,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'deletesession',
-    aliases: ['delsession'],
+    aliases: ["delsession"],
     description: 'Delete session files',
     category: 'Owner',
     ownerOnly: true,
@@ -102,7 +102,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'deletesampah',
-    aliases: ['delsampah', 'deletetemp', 'deltemp'],
+    aliases: ["delsampah", "deletetemp", "deltemp"],
     description: 'Delete temporary files',
     category: 'Owner',
     ownerOnly: true,

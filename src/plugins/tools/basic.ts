@@ -6,7 +6,7 @@ import { exec } from 'child_process';
 export const commands: PluginCommand[] = [
   {
     name: 'fetch',
-    aliases: ['get'],
+    aliases: ["get"],
     description: 'Fetch URL content',
     category: 'Tools',
     premiumOnly: true,
@@ -63,7 +63,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'tovn',
-    aliases: ['toptt', 'tovoice'],
+    aliases: ["toptt", "tovoice"],
     description: 'Convert to voice note',
     category: 'Tools',
     handler: async ({ socket, message, db }) => {
@@ -102,7 +102,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'toimage',
-    aliases: ['toimg'],
+    aliases: ["toimg"],
     description: 'Convert sticker to image',
     category: 'Tools',
     handler: async ({ socket, message, db }) => {
@@ -162,7 +162,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'translate',
-    aliases: ['tr'],
+    aliases: ["tr"],
     description: 'Translate text',
     category: 'Tools',
     handler: async ({ message, args, text, db }) => {
@@ -185,7 +185,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'toqr',
-    aliases: ['qr'],
+    aliases: ["qr"],
     description: 'Generate QR code',
     category: 'Tools',
     limit: 1,
@@ -202,7 +202,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'tohd',
-    aliases: ['remini', 'hd'],
+    aliases: ["remini", "hd"],
     description: 'Enhance image quality',
     category: 'Tools',
     limit: 1,
@@ -239,7 +239,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'dehaze',
-    aliases: ['colorize', 'colorfull'],
+    aliases: ["colorize", "colorfull"],
     description: 'Colorize/dehaze image',
     category: 'Tools',
     limit: 1,
@@ -260,7 +260,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'hitamkan',
-    aliases: ['toblack'],
+    aliases: ["toblack"],
     description: 'Apply skin tone filter',
     category: 'Tools',
     limit: 1,
@@ -345,7 +345,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'sticker',
-    aliases: ['stiker', 's', 'stickergif', 'stikergif', 'sgif', 'stickerwm', 'swm', 'curi', 'colong', 'take', 'stickergifwm', 'sgifwm'],
+    aliases: ["stiker", "s", "stickergif", "stikergif", "sgif", "stickerwm", "swm", "curi", "colong", "take", "stickergifwm", "sgifwm"],
     description: 'Create sticker from image/video',
     category: 'Tools',
     handler: async ({ socket, message, text, db }) => {
@@ -365,7 +365,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'smeme',
-    aliases: ['stickmeme', 'stikmeme', 'stickermeme', 'stikermeme'],
+    aliases: ["stickmeme", "stikmeme", "stickermeme", "stikermeme"],
     description: 'Create meme sticker',
     category: 'Tools',
     limit: 1,
@@ -428,7 +428,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'qc',
-    aliases: ['quote', 'fakechat'],
+    aliases: ["quote", "fakechat"],
     description: 'Create fake chat quote',
     category: 'Tools',
     limit: 1,
@@ -513,7 +513,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'bratvid',
-    aliases: ['bratvideo'],
+    aliases: ["bratvideo"],
     description: 'Create brat style video',
     category: 'Tools',
     limit: 1,
@@ -582,7 +582,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'trigger',
-    aliases: ['triggered'],
+    aliases: ["triggered"],
     description: 'Apply trigger effect to image',
     category: 'Tools',
     limit: 1,
@@ -612,7 +612,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'nuliskanan',
-    aliases: ['nuliskiri', 'foliokanan', 'foliokiri'],
+    aliases: ["nuliskiri", "foliokanan", "foliokiri"],
     description: 'Write text on paper image',
     category: 'Tools',
     limit: 1,
@@ -631,7 +631,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'bass',
-    aliases: ['blown', 'deep', 'earrape', 'fast', 'fat', 'nightcore', 'reverse', 'robot', 'slow', 'smooth', 'tupai'],
+    aliases: ["blown", "deep", "earrape", "fast", "fat", "nightcore", "reverse", "robot", "slow", "smooth", "tupai"],
     description: 'Apply audio effects',
     category: 'Tools',
     handler: async ({ socket, message, db }) => {
@@ -667,7 +667,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'tinyurl',
-    aliases: ['shorturl', 'shortlink'],
+    aliases: ["shorturl", "shortlink"],
     description: 'Shorten URL',
     category: 'Tools',
     limit: 1,
@@ -682,7 +682,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'git',
-    aliases: ['gitclone'],
+    aliases: ["gitclone"],
     description: 'Download GitHub repo as zip',
     category: 'Tools',
     limit: 1,

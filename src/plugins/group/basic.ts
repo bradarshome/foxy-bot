@@ -43,7 +43,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'kick',
-    aliases: ['dor'],
+    aliases: ["dor"],
     description: 'Kick member from group',
     category: 'Group',
     groupOnly: true,
@@ -95,7 +95,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'warn',
-    aliases: ['warning'],
+    aliases: ["warning"],
     description: 'Warn a member',
     category: 'Group',
     groupOnly: true,
@@ -122,7 +122,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'unwarn',
-    aliases: ['delwarn', 'unwarning', 'delwarning'],
+    aliases: ["delwarn", "unwarning", "delwarning"],
     description: 'Remove warning from member',
     category: 'Group',
     groupOnly: true,
@@ -143,7 +143,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setname',
-    aliases: ['setnamegc', 'setsubject', 'setsubjectgc'],
+    aliases: ["setnamegc", "setsubject", "setsubjectgc"],
     description: 'Set group name',
     category: 'Group',
     groupOnly: true,
@@ -158,7 +158,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setdesc',
-    aliases: ['setdescgc', 'setdesk', 'setdeskgc'],
+    aliases: ["setdescgc", "setdesk", "setdeskgc"],
     description: 'Set group description',
     category: 'Group',
     groupOnly: true,
@@ -173,7 +173,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setppgroups',
-    aliases: ['setppgrup', 'setppgc'],
+    aliases: ["setppgrup", "setppgc"],
     description: 'Set group profile picture',
     category: 'Group',
     groupOnly: true,
@@ -195,7 +195,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'delete',
-    aliases: ['del', 'd'],
+    aliases: ["del", "d"],
     description: 'Delete a message',
     category: 'Group',
     handler: async ({ socket, message }) => {
@@ -205,7 +205,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'pin',
-    aliases: ['unpin'],
+    aliases: ["unpin"],
     description: 'Pin or unpin a message',
     category: 'Group',
     groupOnly: true,
@@ -217,7 +217,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'linkgroup',
-    aliases: ['linkgrup', 'linkgc', 'urlgroup', 'urlgrup', 'urlgc'],
+    aliases: ["linkgrup", "linkgc"],
     description: 'Get group invite link',
     category: 'Group',
     groupOnly: true,
@@ -231,7 +231,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'revoke',
-    aliases: ['newlink', 'newurl'],
+    aliases: ["newlink", "newurl"],
     description: 'Revoke group invite link',
     category: 'Group',
     groupOnly: true,
@@ -263,7 +263,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'hidetag',
-    aliases: ['h'],
+    aliases: ["h"],
     description: 'Send hidden tag message',
     category: 'Group',
     groupOnly: true,
@@ -289,7 +289,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'listonline',
-    aliases: ['liston'],
+    aliases: ["liston"],
     description: 'List online members',
     category: 'Group',
     groupOnly: true,
@@ -318,7 +318,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'totalpesan',
-    aliases: ['totalchat'],
+    aliases: ["totalchat"],
     description: 'Show total messages per member',
     category: 'Group',
     groupOnly: true,

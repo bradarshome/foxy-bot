@@ -4,7 +4,7 @@ import type { PluginCommand } from '../../core/plugin-system.js';
 export const commands: PluginCommand[] = [
   {
     name: 'group',
-    aliases: ['grup', 'gc'],
+    aliases: ["grup", "gc"],
     description: 'Group settings management',
     category: 'Group',
     groupOnly: true,

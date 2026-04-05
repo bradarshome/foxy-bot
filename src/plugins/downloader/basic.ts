@@ -5,7 +5,7 @@ import fs from 'fs';
 export const commands: PluginCommand[] = [
   {
     name: 'ytmp3',
-    aliases: ['ytaudio', 'ytplayaudio'],
+    aliases: ["ytaudio", "ytplayaudio"],
     description: 'Download YouTube audio',
     category: 'Downloader',
     limit: 1,
@@ -61,7 +61,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'ytmp4',
-    aliases: ['ytvideo', 'ytplayvideo'],
+    aliases: ["ytvideo", "ytplayvideo"],
     description: 'Download YouTube video',
     category: 'Downloader',
     limit: 1,
@@ -95,7 +95,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'ig',
-    aliases: ['instagram', 'instadl', 'igdown', 'igdl'],
+    aliases: ["instagram", "instadl", "igdown", "igdl"],
     description: 'Download Instagram post',
     category: 'Downloader',
     limit: 1,
@@ -122,7 +122,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'tiktok',
-    aliases: ['tiktokdown', 'ttdown', 'ttdl', 'tt', 'ttmp4', 'ttvideo', 'tiktokmp4', 'tiktokvideo'],
+    aliases: ["tiktokdown", "ttdown", "ttdl", "tt", "ttmp4", "ttvideo", "tiktokmp4", "tiktokvideo"],
     description: 'Download TikTok video',
     category: 'Downloader',
     limit: 1,
@@ -151,7 +151,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'ttmp3',
-    aliases: ['tiktokmp3', 'ttaudio', 'tiktokaudio'],
+    aliases: ["tiktokmp3", "ttaudio", "tiktokaudio"],
     description: 'Download TikTok audio',
     category: 'Downloader',
     limit: 1,
@@ -185,7 +185,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'fb',
-    aliases: ['fbdl', 'fbdown', 'facebook', 'facebookdl', 'facebookdown', 'fbdownload', 'fbmp4', 'fbvideo'],
+    aliases: ["fbdl", "fbdown", "facebook", "facebookdl", "facebookdown", "fbdownload", "fbmp4", "fbvideo"],
     description: 'Download Facebook video',
     category: 'Downloader',
     limit: 1,
@@ -206,7 +206,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'mediafire',
-    aliases: ['mf'],
+    aliases: ["mf"],
     description: 'Download Mediafire file',
     category: 'Downloader',
     limit: 1,

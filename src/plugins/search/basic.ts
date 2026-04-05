@@ -4,7 +4,7 @@ import type { PluginCommand } from '../../core/plugin-system.js';
 export const commands: PluginCommand[] = [
   {
     name: 'gimage',
-    aliases: ['bingimg'],
+    aliases: ["bingimg"],
     description: 'Search Google Images',
     category: 'Search',
     limit: 1,
@@ -24,7 +24,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'play',
-    aliases: ['ytplay', 'yts', 'ytsearch', 'youtubesearch'],
+    aliases: ["ytplay", "yts", "ytsearch", "youtubesearch"],
     description: 'Search YouTube',
     category: 'Search',
     handler: async ({ message, text, db }) => {
@@ -75,7 +75,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'pinterest',
-    aliases: ['pint'],
+    aliases: ["pint"],
     description: 'Search Pinterest images',
     category: 'Search',
     limit: 1,
@@ -135,7 +135,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'npm',
-    aliases: ['npmjs'],
+    aliases: ["npmjs"],
     description: 'Search NPM packages',
     category: 'Search',
     handler: async ({ message, text }) => {
@@ -165,7 +165,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'spotify',
-    aliases: ['spotifysearch'],
+    aliases: ["spotifysearch"],
     description: 'Search Spotify',
     category: 'Search',
     handler: async ({ message, text }) => {
@@ -216,7 +216,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'wastalk',
-    aliases: ['whatsappstalk'],
+    aliases: ["whatsappstalk"],
     description: 'WhatsApp stalk user',
     category: 'Search',
     limit: 1,
@@ -249,7 +249,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'ghstalk',
-    aliases: ['githubstalk'],
+    aliases: ["githubstalk"],
     description: 'GitHub stalk user',
     category: 'Search',
     limit: 1,

@@ -4,7 +4,7 @@ import type { PluginCommand } from '../../core/plugin-system.js';
 export const commands: PluginCommand[] = [
   {
     name: 'menu',
-    aliases: ['allmenu', 'all', 'help'],
+    aliases: ["allmenu", "all", "help"],
     description: 'Show all commands menu',
     category: 'Menu',
     handler: async ({ message, db, args, isCreator, socket }) => {
@@ -270,7 +270,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'sc',
-    aliases: ['script'],
+    aliases: ["script"],
     description: 'Show bot script source',
     category: 'Menu',
     handler: async ({ message, db }) => {
@@ -300,7 +300,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'donasi',
-    aliases: ['donate'],
+    aliases: ["donate"],
     description: 'Show donation info',
     category: 'Menu',
     handler: async ({ message }) => {

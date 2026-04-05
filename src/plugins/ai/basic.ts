@@ -4,7 +4,7 @@ import type { PluginCommand } from '../../core/plugin-system.js';
 export const commands: PluginCommand[] = [
   {
     name: 'ai',
-    aliases: ['google', 'bard', 'gemini'],
+    aliases: ["google", "bard", "gemini"],
     description: 'Ask AI',
     category: 'AI',
     handler: async ({ message, text, db }) => {
@@ -20,7 +20,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'archipelago',
-    aliases: ['grok', 'glm', 'claude'],
+    aliases: ["grok", "glm", "claude"],
     description: 'Advanced AI models',
     category: 'AI',
     handler: async ({ message, text, db }) => {
@@ -46,7 +46,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'deepseek',
-    aliases: ['r1'],
+    aliases: ["r1"],
     description: 'DeepSeek R1 AI',
     category: 'AI',
     handler: async ({ message, text, db }) => {

@@ -5,7 +5,7 @@ import os from 'os';
 export const commands: PluginCommand[] = [
   {
     name: 'owner',
-    aliases: ['listowner'],
+    aliases: ["listowner"],
     description: 'Show owner contact',
     category: 'Bot',
     handler: async ({ socket, message, db }) => {
@@ -15,7 +15,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'profile',
-    aliases: ['cek'],
+    aliases: ["cek"],
     description: 'Show user profile',
     category: 'Bot',
     handler: async ({ message, db }) => {
@@ -42,7 +42,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'req',
-    aliases: ['request'],
+    aliases: ["request"],
     description: 'Send request to owner',
     category: 'Bot',
     handler: async ({ socket, message, text, db }) => {
@@ -54,7 +54,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'daily',
-    aliases: ['claim'],
+    aliases: ["claim"],
     description: 'Daily reward',
     category: 'Bot',
     handler: async ({ message, db }) => {
@@ -64,7 +64,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'transfer',
-    aliases: ['tf'],
+    aliases: ["tf"],
     description: 'Transfer money/limit',
     category: 'Bot',
     handler: async ({ message, args, db }) => {
@@ -99,7 +99,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'runtime',
-    aliases: ['tes', 'bot'],
+    aliases: ["tes", "bot"],
     description: 'Show bot runtime',
     category: 'Bot',
     handler: async ({ message, args, db, socket }) => {
@@ -179,7 +179,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'ping',
-    aliases: ['botstatus', 'statusbot'],
+    aliases: ["botstatus", "statusbot"],
     description: 'Show bot status/ping',
     category: 'Bot',
     handler: async ({ message }) => {
@@ -208,7 +208,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'speedtest',
-    aliases: ['speed'],
+    aliases: ["speed"],
     description: 'Test internet speed',
     category: 'Bot',
     handler: async ({ message }) => {
@@ -241,7 +241,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'readviewonce',
-    aliases: ['readviewone', 'rvo'],
+    aliases: ["readviewone", "rvo"],
     description: 'Read view once message',
     category: 'Bot',
     handler: async ({ socket, message }) => {
@@ -300,7 +300,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'delmsg',
-    aliases: ['deletemsg'],
+    aliases: ["deletemsg"],
     description: 'Delete saved message',
     category: 'Bot',
     handler: async ({ message, text, db }) => {
@@ -345,7 +345,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'setcmd',
-    aliases: ['addcmd'],
+    aliases: ["addcmd"],
     description: 'Set command to sticker',
     category: 'Bot',
     handler: async ({ message, text, db }) => {
@@ -382,7 +382,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'lockcmd',
-    aliases: ['unlockcmd'],
+    aliases: ["unlockcmd"],
     description: 'Lock/unlock sticker command',
     category: 'Bot',
     ownerOnly: true,
@@ -396,7 +396,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'q',
-    aliases: ['quoted'],
+    aliases: ["quoted"],
     description: 'Get quoted message',
     category: 'Bot',
     handler: async ({ socket, message, text }) => {
@@ -418,7 +418,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'confes',
-    aliases: ['confess', 'menfes', 'menfess'],
+    aliases: ["confess", "menfes", "menfess"],
     description: 'Anonymous chat',
     category: 'Bot',
     privateOnly: true,
@@ -453,7 +453,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'delconfes',
-    aliases: ['delconfess', 'delmenfes', 'delmenfess'],
+    aliases: ["delconfess", "delmenfes", "delmenfess"],
     description: 'End anonymous chat',
     category: 'Bot',
     privateOnly: true,
@@ -469,7 +469,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'cai',
-    aliases: ['roomai', 'chatai', 'autoai'],
+    aliases: ["roomai", "chatai", "autoai"],
     description: 'AI chat room',
     category: 'Bot',
     privateOnly: true,
@@ -487,7 +487,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'delcai',
-    aliases: ['delroomai', 'delchatai', 'delautoai'],
+    aliases: ["delroomai", "delchatai", "delautoai"],
     description: 'Delete AI chat room',
     category: 'Bot',
     privateOnly: true,
@@ -517,7 +517,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'stopjadibot',
-    aliases: ['deljadibot'],
+    aliases: ["deljadibot"],
     description: 'Stop being a bot',
     category: 'Bot',
     handler: async ({ socket, message, text }) => {

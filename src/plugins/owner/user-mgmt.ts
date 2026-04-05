@@ -6,7 +6,7 @@ import path from 'path';
 export const commands: PluginCommand[] = [
   {
     name: 'ban',
-    aliases: ['banned'],
+    aliases: ["banned"],
     description: 'Ban a user',
     category: 'Owner',
     ownerOnly: true,
@@ -23,7 +23,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'unban',
-    aliases: ['unbanned'],
+    aliases: ["unbanned"],
     description: 'Unban a user',
     category: 'Owner',
     ownerOnly: true,
@@ -106,7 +106,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'adduang',
-    aliases: ['addmoney'],
+    aliases: ["addmoney"],
     description: 'Add money to a user',
     category: 'Owner',
     ownerOnly: true,
@@ -194,7 +194,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'creategc',
-    aliases: ['buatgc'],
+    aliases: ["buatgc"],
     description: 'Create a new group',
     category: 'Owner',
     ownerOnly: true,

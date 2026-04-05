@@ -79,7 +79,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'coffe',
-    aliases: ['kopi'],
+    aliases: ["kopi"],
     description: 'Random coffee image',
     category: 'Fun',
     handler: async ({ socket, message }) => {
@@ -98,7 +98,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'waifu',
-    aliases: ['neko'],
+    aliases: ["neko"],
     description: 'Random anime waifu/neko',
     category: 'Fun',
     limit: 1,
@@ -142,7 +142,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'halah',
-    aliases: ['hilih', 'huluh', 'heleh', 'holoh'],
+    aliases: ["hilih", "huluh", "heleh", "holoh"],
     description: 'Replace vowels in text',
     category: 'Fun',
     handler: async ({ message, text }) => {
@@ -176,7 +176,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'kapan',
-    aliases: ['kapankah'],
+    aliases: ["kapankah"],
     description: 'Random time answer',
     category: 'Fun',
     handler: async ({ message, text }) => {
@@ -188,7 +188,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'siapa',
-    aliases: ['siapakah'],
+    aliases: ["siapakah"],
     description: 'Random person from group',
     category: 'Fun',
     groupOnly: true,
@@ -230,7 +230,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'ceksakti',
-    aliases: ['cekmati'],
+    aliases: ["cekmati"],
     description: 'Check death prediction (fun)',
     category: 'Fun',
     handler: async ({ message }) => {
@@ -251,7 +251,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'kerangajaib',
-    aliases: ['kerang', 'tanyakerang'],
+    aliases: ["kerang", "tanyakerang"],
     description: 'Magic kerang answer',
     category: 'Fun',
     handler: async ({ message, text }) => {

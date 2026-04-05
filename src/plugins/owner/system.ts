@@ -122,7 +122,7 @@ export const commands: PluginCommand[] = [
   },
   {
     name: 'version',
-    aliases: ['versi', 'v'],
+    aliases: ["versi", "v"],
     description: 'Show bot version',
     category: 'Owner',
     handler: async ({ message }) => {
