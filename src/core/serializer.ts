@@ -282,9 +282,48 @@ export async function serializeMessage(socket: WASocket, store: any): Promise<WA
       })),
     }));
     return socket.sendMessage(jid, {
-      text,
-      footer,
-      title,
+      text: text || '',
+      footer: footer || '',
+      title: title || '',
+      buttonText: buttonText || 'Pilih',
+      sections: listSections,
+      contextInfo: { mentionedJid: mentions || [], ...contextInfo },
+    }, { quoted: options.quoted });
+  };
+
+  // Send document with list (Menu 4: Document + List Hybrid)
+  s.sendDocListMsg = async (jid: string, content: any, options = {}) => {
+    const { text, footer, title, buttonText, sections, contextInfo, mentions, document, fileName, mimetype, pageCount } = content;
+    const listSections = (sections || []).map((sec: any) => ({
+      title: sec.title,
+      rows: (sec.rows || []).map((row: any) => ({
+        header: row.header || '',
+        title: row.title,
+        description: row.description || '',
+        id: row.id,
+      })),
+    }));
+
+    // First send document
+    if (document) {
+      const docContent = typeof document === 'string' && /^https?:\/\//.test(document)
+        ? { url: document }
+        : document;
+      await socket.sendMessage(jid, {
+        document: docContent,
+        fileName: fileName || 'menu.pdf',
+        mimetype: mimetype || 'application/pdf',
+        pageCount: pageCount || 999,
+        caption: text || '',
+        contextInfo: { mentionedJid: mentions || [], ...contextInfo },
+      }, { quoted: options.quoted });
+    }
+
+    // Then send list message
+    return socket.sendMessage(jid, {
+      text: text || '',
+      footer: footer || '',
+      title: title || '',
       buttonText: buttonText || 'Pilih',
       sections: listSections,
       contextInfo: { mentionedJid: mentions || [], ...contextInfo },
