@@ -181,7 +181,16 @@ async function startFoxyBot(): Promise<void> {
   });
 
   // Pairing code logic
-  if (pairingCode && phoneNumber && !socket.authState.creds.registered) {
+  if (pairingCode && !socket.authState.creds.registered) {
+    if (!phoneNumber) {
+      phoneNumber = config.numberBot || await question('Please type your WhatsApp number (e.g. 628xxx): ');
+      phoneNumber = phoneNumber.replace(/[^0-9]/g, '');
+      while (!parsePhoneNumber('+' + phoneNumber).valid || phoneNumber.length < 6) {
+        console.log('Start with your Country WhatsApp code, Example: 62xxx');
+        phoneNumber = await question('Please type your WhatsApp number: ');
+        phoneNumber = phoneNumber.replace(/[^0-9]/g, '');
+      }
+    }
     logger.bot('Requesting Pairing Code...');
     const code = await socket.requestPairingCode(phoneNumber);
     console.log(`Your Pairing Code: ${code} (Expires in 15 seconds)`);
