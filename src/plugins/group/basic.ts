@@ -183,7 +183,7 @@ export const commands: PluginCommand[] = [
       if (!message.quoted) return message.reply('Reply Gambar yang mau dipasang di Profile Grup');
       if (!/image/.test(message.quoted.type || '')) return message.reply(`Reply Image Dengan Caption ${message.prefix + message.command}`);
       const media = await message.quoted.download();
-      const { generateProfilePicture } = await import('../../lib/function.js');
+      const { generateProfilePicture } = await import('../../../lib/function.js');
       const { img } = await generateProfilePicture(media);
       await socket.query({
         tag: 'iq',

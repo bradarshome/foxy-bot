@@ -2,7 +2,7 @@
 import type { PluginCommand } from '../../core/plugin-system.js';
 import fs from 'fs';
 import { exec } from 'child_process';
-import { updateSettings } from '../../lib/function.js';
+import { updateSettings } from '../../../lib/function.js';
 
 export const commands: PluginCommand[] = [
   {
@@ -25,7 +25,7 @@ export const commands: PluginCommand[] = [
     handler: async ({ message }) => {
       await message.reply('*[BOT] Process Update And Upgrade...*');
       try {
-        const { runUpdate } = await import('../../lib/function.js');
+        const { runUpdate } = await import('../../../lib/function.js');
         runUpdate();
       } catch {
         process.exit(0);
@@ -53,7 +53,7 @@ export const commands: PluginCommand[] = [
         return message.reply(`Reply Image Dengan Caption ${message.prefix + message.command}`);
       }
       const media = await message.quoted.download();
-      const { generateProfilePicture } = await import('../../lib/function.js');
+      const { generateProfilePicture } = await import('../../../lib/function.js');
       const { img } = await generateProfilePicture(media);
       await socket.query({
         tag: 'iq',

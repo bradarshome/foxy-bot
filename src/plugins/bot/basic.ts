@@ -58,7 +58,7 @@ export const commands: PluginCommand[] = [
     description: 'Daily reward',
     category: 'Bot',
     handler: async ({ message, db }) => {
-      const { daily } = await import('../../lib/game.js');
+      const { daily } = await import('../../../lib/game.js');
       daily(message, db);
     },
   },
@@ -68,7 +68,7 @@ export const commands: PluginCommand[] = [
     description: 'Transfer money/limit',
     category: 'Bot',
     handler: async ({ message, args, db }) => {
-      const { transfer } = await import('../../lib/game.js');
+      const { transfer } = await import('../../../lib/game.js');
       transfer(message, args, db);
     },
   },
@@ -77,7 +77,7 @@ export const commands: PluginCommand[] = [
     description: 'Buy limit with money',
     category: 'Bot',
     handler: async ({ message, args, db }) => {
-      const { buy } = await import('../../lib/game.js');
+      const { buy } = await import('../../../lib/game.js');
       buy(message, args, db);
     },
   },
@@ -103,7 +103,7 @@ export const commands: PluginCommand[] = [
     description: 'Show bot runtime',
     category: 'Bot',
     handler: async ({ message, args, db, socket }) => {
-      const { runtime } = await import('../../lib/function.js');
+      const { runtime } = await import('../../../lib/function.js');
       if (!args[0] && !args[1]) return message.reply(`*Bot Telah Online Selama*\n*${runtime(process.uptime())}*`);
       const set = db.set?.[socket.decodeJid(socket.user!.id)] || {};
       const isCreator = db?.owner?.includes(message.sender.split('@')[0]);
@@ -183,7 +183,7 @@ export const commands: PluginCommand[] = [
     description: 'Show bot status/ping',
     category: 'Bot',
     handler: async ({ message }) => {
-      const { runtime, formatp } = await import('../../lib/function.js');
+      const { runtime, formatp } = await import('../../../lib/function.js');
       const speed = (await import('performance-now')).default;
       const used = process.memoryUsage();
       const cpus = os.cpus().map(cpu => {
@@ -446,7 +446,7 @@ export const commands: PluginCommand[] = [
         }, 600000);
         socket.sendMessage(tujuan, { text: `_${message.command} connected_\n*Note :* jika ingin mengakhiri ketik _*${message.prefix}del${message.command}*_` });
         message.reply(`_Memulai ${message.command}..._\n*Silahkan Mulai kirim pesan/media*\n*Durasi ${message.command} hanya selama 10 menit*`);
-        const { setLimit } = await import('../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.js');
         setLimit(message, db);
       } else message.reply(`Masukkan Nomernya!\nExample : ${message.prefix + message.command} 62xxxx|Nama Samaran`);
     },
@@ -511,7 +511,7 @@ export const commands: PluginCommand[] = [
       if (!onWa.length > 0) return message.reply('Nomor tersebut tidak terdaftar di WhatsApp!');
       await JadiBot(socket, nmrnya, message, store);
       message.reply(`Gunakan ${message.prefix}stopjadibot\nUntuk Berhenti`);
-      const { setLimit } = await import('../../lib/game.js');
+      const { setLimit } = await import('../../../lib/game.js');
       setLimit(message, db);
     },
   },

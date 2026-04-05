@@ -432,8 +432,9 @@ let pluginsLoaded = false;
 async function loadPluginHandler(socket: WASocket, m: any, store: any, db: any): Promise<void> {
   // Load plugins once on first message
   if (!pluginsLoaded) {
+    pluginsLoaded = true; // Set immediately to prevent race conditions
     try {
-      const { loadPlugins } = await import('./plugin-system.js');
+      const { loadPlugins, getAllCommands } = await import('./plugin-system.js');
 
       // Import all plugin categories
       const ownerPlugins = await import('../plugins/owner/index.js');
@@ -456,8 +457,6 @@ async function loadPluginHandler(socket: WASocket, m: any, store: any, db: any):
       loadPlugins(funPlugins);
       loadPlugins(menuPlugins);
 
-      pluginsLoaded = true;
-      const { getAllCommands } = await import('./plugin-system.js');
       console.log(`[Plugin] Loaded ${getAllCommands().length} commands`);
     } catch (error) {
       console.error('[Plugin] Failed to load plugins:', error);

@@ -181,20 +181,10 @@ async function startFoxyBot(): Promise<void> {
   });
 
   // Pairing code logic
-  if (pairingCode && !phoneNumber && !socket.authState.creds.registered) {
-    async function getPhoneNumber(): Promise<void> {
-      phoneNumber = config.numberBot || await question('Please type your WhatsApp number: ');
-      phoneNumber = phoneNumber.replace(/[^0-9]/g, '');
-
-      if (!parsePhoneNumber('+' + phoneNumber).valid && phoneNumber.length < 6) {
-        console.log('Start with your Country WhatsApp code, Example: 62xxx');
-        await getPhoneNumber();
-      }
-    }
-
-    await getPhoneNumber();
-    exec('rm -rf ./foxy-session/*');
-    logger.bot('Phone number captured. Waiting for Connection... (Estimated: 2-5 minutes)');
+  if (pairingCode && phoneNumber && !socket.authState.creds.registered) {
+    logger.bot('Requesting Pairing Code...');
+    const code = await socket.requestPairingCode(phoneNumber);
+    console.log(`Your Pairing Code: ${code} (Expires in 15 seconds)`);
   }
 
   // Apply serializer (adds helper methods to socket)
@@ -209,8 +199,8 @@ async function startFoxyBot(): Promise<void> {
 
     // Pairing code request
     if ((connection === 'connecting' || qr) && pairingCode && phoneNumber && !socket.authState.creds.registered && !pairingStarted) {
+      pairingStarted = true;
       setTimeout(async () => {
-        pairingStarted = true;
         logger.bot('Requesting Pairing Code...');
         const code = await socket.requestPairingCode(phoneNumber);
         console.log(`Your Pairing Code: ${code} (Expires in 15 seconds)`);

@@ -87,7 +87,7 @@ export const commands: PluginCommand[] = [
         await socket.sendFileUrl(message.chat, 'https://coffee.alexflipnote.dev/random', '☕ Random Coffe', message);
       } catch {
         try {
-          const { fetchJson, pickRandom } = await import('../../lib/function.js');
+          const { fetchJson, pickRandom } = await import('../../../lib/function.js');
           const anu = await fetchJson('https://api.sampleapis.com/coffee/hot');
           await socket.sendFileUrl(message.chat, pickRandom(anu).image, '☕ Random Coffe', message);
         } catch {
@@ -108,7 +108,7 @@ export const commands: PluginCommand[] = [
         const res = await (await import('node-fetch')).default('https://api.waifu.pics/' + (text === 'nsfw' ? 'nsfw' : 'sfw') + '/' + message.command);
         const data = await res.json();
         await socket.sendFileUrl(message.chat, data.url, 'Random Waifu', message);
-        const { setLimit } = await import('../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.js');
         setLimit(message, (global as any).db);
       } catch {
         message.reply('Server sedang offline!');
@@ -128,7 +128,7 @@ export const commands: PluginCommand[] = [
         { url: 'https://telegra.ph/file/a9d7332e7ba1d1d26a2be.png', no: 5 },
         { url: 'https://telegra.ph/file/99dcd999991a79f9ba0c0.png', no: 6 },
       ];
-      const { pickRandom } = await import('../../lib/function.js');
+      const { pickRandom } = await import('../../../lib/function.js');
       const media = pickRandom(ddsa);
       try {
         await socket.sendAsSticker(message.chat, media.url, message, { packname: db?.packname, author: db?.author, isAvatar: 1 });
