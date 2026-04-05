@@ -38,8 +38,7 @@ jobs:
         run: npm run test:plugins || echo "TEST_FAILED=true" >> $GITHUB_ENV
         continue-on-error: true
 
-      - name: Send Telegram notification on error
-        if: env.TEST_FAILED == 'true' || steps.typecheck.outcome == 'failure' || steps.build.outcome == 'failure'
+      - name: Send Telegram notification
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -52,20 +51,42 @@ jobs:
           TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
           BRANCH=${GITHUB_REF#refs/heads/}
 
-          if [ -f test-results.md ]; then
-            REPORT=$(cat test-results.md)
-          else
-            REPORT=""
-          fi
-
+          HAS_ERROR=false
           ERRORS=""
+
           if [ "${{ steps.typecheck.outcome }}" = "failure" ]; then
+            HAS_ERROR=true
             ERRORS="${ERRORS}❌ *TypeScript typecheck gagal*\n\n"
           fi
           if [ "${{ steps.build.outcome }}" = "failure" ]; then
+            HAS_ERROR=true
             ERRORS="${ERRORS}❌ *Build gagal*\n\n"
+          fi
+          if [ "${{ env.TEST_FAILED }}" = "true" ]; then
+            HAS_ERROR=true
+          fi
+
+          if [ "$HAS_ERROR" = "true" ]; then
+            STATUS="🔴 *Test Gagal*"
+            if [ -f test-results.md ]; then
+              REPORT=$(cat test-results.md)
+            else
+              REPORT=""
+            fi
+            BODY="${ERRORS}${REPORT}"
+          else
+            STATUS="🟢 *Test Berhasil*"
+            if [ -f test-results.md ]; then
+              # Extract summary lines from report
+              PLUGINS_LINE=$(grep "Plugins:" test-results.md || echo "")
+              APIS_LINE=$(grep "APIs:" test-results.md || echo "")
+              DURATION_LINE=$(grep "Duration:" test-results.md || echo "")
+              BODY="✅ Semua plugin dan API dalam kondisi baik\n\n${PLUGINS_LINE}\n${APIS_LINE}\n${DURATION_LINE}"
+            else
+              BODY="✅ Semua test lulus tanpa error"
+            fi
           fi
 
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -H "Content-Type: application/json" \
-            -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"🦊 Foxy Bot — Test Gagal\n🕒 \`${TIMESTAMP}\`\n👤 \`${GITHUB_ACTOR}\`\n🌿 \`${BRANCH}\`\n📝 \`${GITHUB_SHA}\`\n\n${ERRORS}${REPORT}\n🔗 Full log: https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\",\"parse_mode\":\"Markdown\",\"disable_web_page_preview\":true}"
+            -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"🦊 Foxy Bot — ${STATUS}\n🕒 \`${TIMESTAMP}\`\n👤 \`${GITHUB_ACTOR}\`\n🌿 \`${BRANCH}\`\n📝 \`${GITHUB_SHA}\`\n\n${BODY}\n🔗 Full log: https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\",\"parse_mode\":\"Markdown\",\"disable_web_page_preview\":true}"
