@@ -24,11 +24,14 @@ jobs:
         run: npm install
 
       - name: TypeScript typecheck
+        id: typecheck
         run: npm run typecheck
         continue-on-error: true
 
       - name: Build check
+        id: build
         run: npm run build
+        continue-on-error: true
 
       - name: Plugin health check
         id: plugin-test
@@ -36,17 +39,33 @@ jobs:
         continue-on-error: true
 
       - name: Send Telegram notification on error
-        if: env.TEST_FAILED == 'true'
+        if: env.TEST_FAILED == 'true' || steps.typecheck.outcome == 'failure' || steps.build.outcome == 'failure'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_ACTOR: ${{ github.actor }}
         run: |
+          TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          BRANCH=${GITHUB_REF#refs/heads/}
+
           if [ -f test-results.md ]; then
             REPORT=$(cat test-results.md)
-            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-              -H "Content-Type: application/json" \
-              -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"🦊 Foxy Bot — Test Gagal\n\n❌ Plugin/API error di commit \`${GITHUB_SHA}\`\n\n${REPORT}\n\n🔗 Full log: https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\",\"parse_mode\":\"Markdown\",\"disable_web_page_preview\":true}"
+          else
+            REPORT=""
           fi
+
+          ERRORS=""
+          if [ "${{ steps.typecheck.outcome }}" = "failure" ]; then
+            ERRORS="${ERRORS}❌ *TypeScript typecheck gagal*\n\n"
+          fi
+          if [ "${{ steps.build.outcome }}" = "failure" ]; then
+            ERRORS="${ERRORS}❌ *Build gagal*\n\n"
+          fi
+
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"🦊 Foxy Bot — Test Gagal\n🕒 \`${TIMESTAMP}\`\n👤 \`${GITHUB_ACTOR}\`\n🌿 \`${BRANCH}\`\n📝 \`${GITHUB_SHA}\`\n\n${ERRORS}${REPORT}\n🔗 Full log: https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\",\"parse_mode\":\"Markdown\",\"disable_web_page_preview\":true}"

@@ -263,10 +263,12 @@ function printResults(report: TestReport): void {
 // Generate markdown report for Telegram/CI
 function generateMarkdownReport(report: TestReport): string {
   const duration = ((report.endTime - report.startTime) / 1000).toFixed(2);
+  const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
   let md = '';
 
   // Header
-  md += `🦊 *Foxy Bot - Plugin Test Report*\n\n`;
+  md += `🦊 *Foxy Bot - Plugin Test Report*\n`;
+  md += `🕒 \`${timestamp}\`\n\n`;
   
   // Plugin errors
   const failedPlugins = report.plugins.filter(p => p.status === 'fail');
