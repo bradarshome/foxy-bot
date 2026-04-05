@@ -104,6 +104,21 @@ async function fetchApi(endpoint: string, data: any = {}, options: any = {}): Pr
 (global as any).pairing_code = config.pairingCode;
 
 async function startFoxyBot(): Promise<void> {
+  // Get phone number BEFORE creating socket (if pairing mode and not registered)
+  if (pairingCode && !phoneNumber) {
+    phoneNumber = config.numberBot || '';
+    if (!phoneNumber) {
+      phoneNumber = await question('Please type your WhatsApp number (e.g. 628xxx): ');
+      phoneNumber = phoneNumber.replace(/[^0-9]/g, '');
+    }
+    while (!phoneNumber || !parsePhoneNumber('+' + phoneNumber).valid || phoneNumber.length < 6) {
+      console.log('Start with your Country WhatsApp code, Example: 62xxx');
+      phoneNumber = await question('Please type your WhatsApp number: ');
+      phoneNumber = phoneNumber.replace(/[^0-9]/g, '');
+    }
+    logger.bot(`Phone number set: +${phoneNumber}`);
+  }
+
   try {
     // Load databases
     const dbData = await database.read();
@@ -180,22 +195,6 @@ async function startFoxyBot(): Promise<void> {
     },
   });
 
-  // Pairing code logic
-  if (pairingCode && !socket.authState.creds.registered) {
-    if (!phoneNumber) {
-      phoneNumber = config.numberBot || await question('Please type your WhatsApp number (e.g. 628xxx): ');
-      phoneNumber = phoneNumber.replace(/[^0-9]/g, '');
-      while (!parsePhoneNumber('+' + phoneNumber).valid || phoneNumber.length < 6) {
-        console.log('Start with your Country WhatsApp code, Example: 62xxx');
-        phoneNumber = await question('Please type your WhatsApp number: ');
-        phoneNumber = phoneNumber.replace(/[^0-9]/g, '');
-      }
-    }
-    logger.bot('Requesting Pairing Code...');
-    const code = await socket.requestPairingCode(phoneNumber);
-    console.log(`Your Pairing Code: ${code} (Expires in 15 seconds)`);
-  }
-
   // Apply serializer (adds helper methods to socket)
   await serializeMessage(socket, globalStore);
 
@@ -206,7 +205,7 @@ async function startFoxyBot(): Promise<void> {
   socket.ev.on('connection.update', async (update: Partial<ConnectionState>) => {
     const { qr, connection, lastDisconnect, isNewLogin, receivedPendingNotifications } = update;
 
-    // Pairing code request
+    // Pairing code request - only after connecting starts
     if ((connection === 'connecting' || qr) && pairingCode && phoneNumber && !socket.authState.creds.registered && !pairingStarted) {
       pairingStarted = true;
       setTimeout(async () => {
