@@ -7,7 +7,21 @@ export const commands: PluginCommand[] = [
     aliases: ['allmenu', 'all', 'help'],
     description: 'Show all commands menu',
     category: 'Menu',
-    handler: async ({ message, db }) => {
+    handler: async ({ message, db, args, isCreator, socket }) => {
+      // Handle .menu set <1,2,3>
+      if (args[0] === 'set') {
+        if (!isCreator) return message.reply('Owner only!');
+        if (['1', '2', '3'].includes(args[1])) {
+          const botNumber = socket.decodeJid(socket.user!.id);
+          if (!db.set[botNumber]) db.set[botNumber] = {};
+          db.set[botNumber].template = parseInt(args[1]);
+          message.reply('Sukses Mengubah Template Menu');
+        } else {
+          message.reply(`Template Menu:\n- 1 (Button Menu)\n- 2 (List Menu)\n- 3 (Document Menu)\n\nExample: ${message.prefix + message.command} set 1`);
+        }
+        return;
+      }
+
       const { getAllCommands, getCategories } = await import('../../core/plugin-system.js');
       const commands = getAllCommands();
       const categories = getCategories();
