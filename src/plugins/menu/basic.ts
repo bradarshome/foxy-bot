@@ -8,16 +8,16 @@ export const commands: PluginCommand[] = [
     description: 'Show all commands menu',
     category: 'Menu',
     handler: async ({ message, db, args, isCreator, socket }) => {
-      // Handle .menu set <1,2,3>
+      // Handle .menu set <1,2,3,4>
       if (args[0] === 'set') {
         if (!isCreator) return message.reply('Owner only!');
-        if (['1', '2', '3'].includes(args[1])) {
+        if (['1', '2', '3', '4'].includes(args[1])) {
           const botNumber = socket.decodeJid(socket.user!.id);
           if (!db.set[botNumber]) db.set[botNumber] = {};
           db.set[botNumber].template = parseInt(args[1]);
           message.reply('Sukses Mengubah Template Menu');
         } else {
-          message.reply(`Template Menu:\n- 1 (Button Menu)\n- 2 (List Menu)\n- 3 (Document Menu)\n\nExample: ${message.prefix + message.command} set 1`);
+          message.reply(`Template Menu:\n- 1 (Button Menu)\n- 2 (List Menu)\n- 3 (Document Menu)\n- 4 (Document + List Hybrid)\n\nExample: ${message.prefix + message.command} set 1`);
         }
         return;
       }
@@ -26,9 +26,40 @@ export const commands: PluginCommand[] = [
       const commands = getAllCommands();
       const categories = getCategories();
       const prefix = message.prefix;
-      const botname = db?.set?.[message.chat]?.botname || db?.botname || 'Foxy Bot';
-      const author = db?.set?.[message.chat]?.author || db?.author || 'Foxy Bot';
+      const botNumber = socket.decodeJid(socket.user!.id);
+      const botname = db?.set?.[botNumber]?.botname || db?.botname || 'Foxy Bot';
+      const author = db?.set?.[botNumber]?.author || db?.author || 'Foxy Bot';
+      const packname = db?.set?.[botNumber]?.packname || db?.packname || 'Bot WhatsApp';
+      const setv = (db?.listv || ['•'])[Math.floor(Math.random() * (db?.listv || ['•']).length)];
 
+      // Use template menu if template is set
+      const template = db?.set?.[botNumber]?.template || 0;
+      if (template >= 1 && template <= 4) {
+        const moment = (await import('moment-timezone')).default;
+        const timezone = db?.timezone || 'Asia/Jakarta';
+        const locale = db?.locale || 'id';
+        const now = moment.tz(timezone);
+        const date = now.format('DD/MM/YYYY');
+        const date_time = now.format('HH:mm:ss');
+        const locale_day = now.locale(locale).format('dddd');
+        const jam = now.format('HH');
+        let ucapanWaktu;
+        if (jam >= '04' && jam < '10') ucapanWaktu = '🌅 Selamat Pagi';
+        else if (jam >= '10' && jam < '15') ucapanWaktu = '☀️ Selamat Siang';
+        else if (jam >= '15' && jam < '18') ucapanWaktu = '🌇 Selamat Sore';
+        else ucapanWaktu = '🌙 Selamat Malam';
+
+        const isVip = db.users[message.sender]?.vip;
+        const isPremium = db.premium?.some((p: any) => p.id === message.sender);
+
+        const templateMenu = await import('../../../lib/template_menu.cjs');
+        await templateMenu.default(socket, template, message, prefix, setv, db, {
+          locale_day, date, date_time, botNumber, author, packname, isVip, isPremium, ucapanWaktu
+        });
+        return;
+      }
+
+      // Default: show text menu
       let menuText = `╭──❍「 *${botname}* 」❍\n`;
       menuText += `│ Prefix: ${prefix}\n`;
       menuText += `│ Total Fitur: ${commands.length}\n`;
