@@ -74,7 +74,7 @@ export const commands: PluginCommand[] = [
       if (set?.owner) {
         if (set.owner.find((a: string) => nmrnya.includes(a))) return message.reply('Nomer Tersebut Sudah Ada Di Owner!');
         set.owner.push(nmrnya.split('@')[0]);
-        const settingsPath = path.join(process.cwd(), 'settings.js');
+        const settingsPath = path.join(process.cwd(), 'settings.cjs');
         const { updateSettings } = await import('../../lib/function.js');
         await updateSettings({ filePath: settingsPath, owner: set.owner });
       }
@@ -98,7 +98,7 @@ export const commands: PluginCommand[] = [
       const index = list.findIndex((o: string) => o === nmrnya.split('@')[0]);
       if (index === -1) return message.reply('Owner tidak ditemukan di daftar!');
       list.splice(index, 1);
-      const settingsPath = path.join(process.cwd(), 'settings.js');
+      const settingsPath = path.join(process.cwd(), 'settings.cjs');
       const { updateSettings } = await import('../../lib/function.js');
       await updateSettings({ filePath: settingsPath, owner: set.owner });
       message.reply('Selesai!');

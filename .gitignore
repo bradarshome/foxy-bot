@@ -11,8 +11,8 @@ nazedev/
 *.session
 
 # Settings (contains API keys)
-settings.js
-settings.js.bak
+settings.cjs
+settings.cjs.bak
 
 # Old JS files (migrated to TypeScript)
 index.js

@@ -3,10 +3,10 @@ import type { Config } from '../types/config.js';
 
 const require = createRequire(import.meta.url);
 
-// Load settings.js and return typed config
+// Load settings.cjs and return typed config
 export function loadConfig(): Config {
-  // Load settings.js first (sets global variables)
-  require('../../settings.js');
+  // Load settings.cjs first (sets global variables)
+  require('../../settings.cjs');
 
   const g = global as any;
 

@@ -64,15 +64,15 @@ npm install
 
 ### 3. Setup Konfigurasi
 
-Buat file `settings.js` dengan menyalin dari template:
+Buat file `settings.cjs` dengan menyalin dari template:
 
 ```bash
-cp settings.example.js settings.js
+cp settings.example.js settings.cjs
 ```
 
-> **Penting:** File `settings.js` tidak disertakan di repository karena berisi data sensitif (API key, nomor owner). Kamu harus membuatnya sendiri dari `settings.example.js`.
+> **Penting:** File `settings.cjs` tidak disertakan di repository karena berisi data sensitif (API key, nomor owner). Kamu harus membuatnya sendiri dari `settings.example.js`.
 
-Edit file `settings.js` dan ubah bagian berikut:
+Edit file `settings.cjs` dan ubah bagian berikut:
 
 ```js
 global.owner = ["628xxxxxxxxxx"]     // Nomor owner (bisa lebih dari 1)
@@ -86,7 +86,7 @@ Untuk fitur berbasis API (AI, downloader, tools), dapatkan API key dari:
 - **Naze API**: https://naze.biz.id/profile
 - **Neosantara AI**: https://app.neosantara.xyz/api-keys
 
-Lalu masukkan ke `settings.js`:
+Lalu masukkan ke `settings.cjs`:
 
 ```js
 global.APIKeys = {
@@ -118,7 +118,7 @@ Saat pertama kali dijalankan, bot akan meminta nomor WhatsApp untuk pairing. Mas
 foxy-bot/
 ├── src/
 │   ├── core/              # Inti sistem bot
-│   │   ├── config.ts          # Loader konfigurasi dari settings.js
+│   │   ├── config.ts          # Loader konfigurasi dari settings.cjs
 │   │   ├── database-manager.ts # Manajemen database & settings
 │   │   ├── plugin-system.ts   # Sistem plugin & command router
 │   │   ├── serializer.ts      # Message serializer & event handler
@@ -148,7 +148,7 @@ foxy-bot/
 │   └── uploader.js          # Upload media
 ├── database/            # Data bot (auto-generated)
 │   └── temp/                # File temporary
-├── settings.js          # Konfigurasi utama (JANGAN di-commit!)
+├── settings.cjs          # Konfigurasi utama (JANGAN di-commit!)
 ├── settings.example.js  # Template konfigurasi
 ├── package.json
 └── tsconfig.json
@@ -207,7 +207,7 @@ Command baru akan otomatis terdaftar dan muncul di menu!
 
 ## ⚙️ Konfigurasi
 
-Semua pengaturan ada di **`settings.js`**. Setiap perubahan akan otomatis ter-load tanpa perlu restart bot.
+Semua pengaturan ada di **`settings.cjs`**. Setiap perubahan akan otomatis ter-load tanpa perlu restart bot.
 
 | Setting | Tipe | Keterangan |
 |---------|------|------------|
@@ -235,7 +235,7 @@ Foxy Bot mendukung dua jenis penyimpanan database:
 Data disimpan di file `database/database.json`. Cocok untuk penggunaan personal.
 
 ### MongoDB
-Untuk penggunaan skala besar atau multi-instance. Ubah `tempatDB` dan `tempatStore` di `settings.js` ke URL MongoDB:
+Untuk penggunaan skala besar atau multi-instance. Ubah `tempatDB` dan `tempatStore` di `settings.cjs` ke URL MongoDB:
 
 ```js
 global.tempatDB = 'mongodb+srv://user:pass@cluster.mongodb.net/foxybot'
@@ -301,7 +301,7 @@ brew install ffmpeg
 ```
 
 ### Fitur API tidak bekerja
-- Pastikan API key sudah benar di `settings.js`
+- Pastikan API key sudah benar di `settings.cjs`
 - Cek status API di https://naze.biz.id
 - Pastikan kuota API masih tersedia
 
