@@ -132,6 +132,9 @@ async function startFoxyBot(): Promise<void> {
       groupMetadata: {},
     };
 
+    // Ensure presences exists even if storeData has it undefined
+    if (!globalStore.presences) globalStore.presences = {};
+
     (global as any).db = globalDb;
     (global as any).store = globalStore;
 
@@ -294,7 +297,8 @@ async function startFoxyBot(): Promise<void> {
 
   // Event: presence update
   socket.ev.on('presence.update', ({ id, presences }: any) => {
-    globalStore.presences[id] = globalStore.presences?.[id] || {};
+    if (!globalStore.presences) globalStore.presences = {};
+    globalStore.presences[id] = globalStore.presences[id] || {};
     Object.assign(globalStore.presences[id], presences);
   });
 

@@ -470,6 +470,9 @@ async function loadPluginHandler(socket: WASocket, m: any, store: any, db: any):
 
   if (!command) return;
 
+  // Attach prefix to message for use in plugins
+  m.prefix = prefix;
+
   // Check if command exists in plugin registry
   const { handleCommand, getCommand } = await import('./plugin-system.js');
   if (!getCommand(command)) return;
