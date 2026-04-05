@@ -205,6 +205,110 @@ export async function serializeMessage(socket: WASocket, store: any): Promise<WA
     s.public = true;
   }
 
+  // Send text
+  s.sendText = (jid: string, text: string, quoted: any, options = {}) => {
+    return socket.sendMessage(jid, { text, ...options }, { quoted });
+  };
+
+  // Send media (image/video/audio/document)
+  s.sendMedia = async (jid: string, pathMedia: string | Buffer, fileName: string = '', caption: string = '', quoted: any = '', options = {}) => {
+    const { filename, mime, ext, isTemp } = await s.getFile(pathMedia);
+    let res: any;
+    if (/webp/.test(mime) || (options && options.asSticker)) {
+      res = await s.sendAsSticker(jid, filename, quoted, options);
+    } else if (/image/.test(mime)) {
+      res = await socket.sendMessage(jid, { image: { url: filename }, caption, ...options }, { quoted });
+    } else if (/video/.test(mime)) {
+      res = await socket.sendMessage(jid, { video: { url: filename }, caption, mimetype: 'video/mp4', ...options }, { quoted });
+    } else if (/audio/.test(mime)) {
+      res = await socket.sendMessage(jid, { audio: { url: filename }, mimetype: 'audio/mpeg', ...options }, { quoted });
+    } else {
+      res = await socket.sendMessage(jid, { document: { url: filename }, caption, mimetype: mime, fileName: fileName || `file.${ext}`, ...options }, { quoted });
+    }
+    if (isTemp) fs.unlinkSync(filename);
+    return res;
+  };
+
+  // Send as sticker
+  s.sendAsSticker = async (jid: string, pathMedia: string | Buffer, quoted: any = '', options = {}) => {
+    const { filename, mime, ext } = await s.getFile(pathMedia);
+    const { default: { Image } } = await import('jimp');
+    const { writeExif } = await import('../../lib/exif.cjs');
+    let media: Buffer;
+    if (/image/.test(mime)) {
+      const img = await Image.read(filename);
+      media = await img.getBufferAsync('image/png');
+    } else if (/video/.test(mime)) {
+      const img = await Image.read(filename);
+      media = await img.getBufferAsync('image/png');
+    } else if (/webp/.test(mime)) {
+      media = fs.readFileSync(filename);
+    } else {
+      throw new Error('Format tidak didukung');
+    }
+    const exif = await writeExif({ mimetype: mime, data: media }, options);
+    return socket.sendMessage(jid, { sticker: { url: exif } as any, ...options }, { quoted });
+  };
+
+  // Send button message
+  s.sendButtonMsg = async (jid: string, content: any, options = {}) => {
+    const { text, footer, buttons, contextInfo, mentions } = content;
+    const buttonRows = (buttons || []).map((btn: any, i: number) => ({
+      header: '',
+      title: btn.buttonText?.displayText || btn.title || `Button ${i + 1}`,
+      id: btn.buttonId || btn.id || `btn_${i}`,
+      type: btn.type || 1,
+    }));
+    return socket.sendMessage(jid, {
+      text,
+      footer,
+      buttons: buttonRows,
+      headerType: 1,
+      viewOnce: true,
+      contextInfo: { mentionedJid: mentions || [], ...contextInfo },
+    }, { quoted: options.quoted });
+  };
+
+  // Send list message
+  s.sendListMsg = async (jid: string, content: any, options = {}) => {
+    const { text, footer, title, buttonText, sections, contextInfo, mentions } = content;
+    const listSections = (sections || []).map((sec: any) => ({
+      title: sec.title,
+      rows: (sec.rows || []).map((row: any) => ({
+        header: row.header || '',
+        title: row.title,
+        description: row.description || '',
+        id: row.id,
+      })),
+    }));
+    return socket.sendMessage(jid, {
+      text,
+      footer,
+      title,
+      buttonText: buttonText || 'Pilih',
+      sections: listSections,
+      contextInfo: { mentionedJid: mentions || [], ...contextInfo },
+    }, { quoted: options.quoted });
+  };
+
+  // Send album message
+  s.sendAlbumMessage = async (jid: string, content: any, options = {}) => {
+    const { album, caption } = content;
+    const msgs: any[] = [];
+    for (let i = 0; i < album.length; i++) {
+      const item = album[i];
+      const msgContent: any = {};
+      if (item.image) msgContent.imageMessage = await generateWAMessageFromContent(jid, { image: item.image }, { upload: socket.waUploadToServer });
+      if (item.video) msgContent.videoMessage = await generateWAMessageFromContent(jid, { video: item.video }, { upload: socket.waUploadToServer });
+      msgs.push(msgContent);
+    }
+    return socket.relayMessage(jid, {
+      messageContextInfo: { messageSecret: randomBytes(32) },
+      albumMessage: { expectedImageCount: album.filter((a: any) => a.image).length, expectedVideoCount: album.filter((a: any) => a.video).length },
+      messages: msgs,
+    }, {});
+  };
+
   return socket;
 }
 
