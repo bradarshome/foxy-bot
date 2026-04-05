@@ -10,7 +10,7 @@ export const commands: PluginCommand[] = [
     category: 'Owner',
     ownerOnly: true,
     handler: async ({ message, text, db }) => {
-      const { fetchJson, updateSettings } = await import('../../../lib/function.js');
+      const { fetchJson, updateSettings } = await import('../../../lib/function.cjs');
       const res = await fetchJson('https://raw.githubusercontent.com/nazedev/database/refs/heads/master/bot/lang.json');
       if (res.some((a: any) => a.lang === text)) {
         const selectedLang = res.find((a: any) => a.lang === text);
@@ -28,7 +28,7 @@ export const commands: PluginCommand[] = [
     ownerOnly: true,
     handler: async ({ message, args, db }) => {
       if (['free', 'premium', 'vip'].includes(args[0]) && !isNaN(Number(args[1]))) {
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, setLimitRole: { role: args[0], value: Number(args[1]) } });
         message.reply('Selesai!');
@@ -43,7 +43,7 @@ export const commands: PluginCommand[] = [
     ownerOnly: true,
     handler: async ({ message, args, db }) => {
       if (['free', 'premium', 'vip'].includes(args[0]) && !isNaN(Number(args[1]))) {
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, setMoneyRole: { role: args[0], value: Number(args[1]) } });
         message.reply('Selesai!');
@@ -59,7 +59,7 @@ export const commands: PluginCommand[] = [
     handler: async ({ message, text }) => {
       if (text || message.quoted) {
         const teksnya = text ? text : message.quoted.text;
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, botname: teksnya.trim() });
         message.reply('Selesai!');
@@ -75,7 +75,7 @@ export const commands: PluginCommand[] = [
     handler: async ({ message, text }) => {
       if (text || message.quoted) {
         const teksnya = text ? text : message.quoted.text;
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, packname: teksnya.trim() });
         message.reply('Selesai!');
@@ -91,7 +91,7 @@ export const commands: PluginCommand[] = [
     handler: async ({ message, text }) => {
       if (text || message.quoted) {
         const teksnya = text ? text : message.quoted.text;
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, author: teksnya.trim() });
         message.reply('Selesai!');
@@ -109,7 +109,7 @@ export const commands: PluginCommand[] = [
       if (text || message.quoted) {
         const teksnya = text ? text : message.quoted.text;
         if (!locales.includes(teksnya)) return message.reply('Locale List:\n' + locales.map(a => '- ' + a).join('\n'));
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, locale: teksnya.trim() });
         message.reply('Selesai!');
@@ -127,7 +127,7 @@ export const commands: PluginCommand[] = [
       if (text || message.quoted) {
         const teksnya = text ? text : message.quoted.text;
         if (!timez.includes(teksnya)) return message.reply('Timezone List:\n' + timez.map(a => '- ' + a).join('\n'));
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, timezone: teksnya.trim() });
         message.reply('Selesai!');
@@ -142,7 +142,7 @@ export const commands: PluginCommand[] = [
     ownerOnly: true,
     handler: async ({ message, text, args, db }) => {
       if (!text) return message.reply('Mana apikey nya?');
-      const { updateSettings } = await import('../../../lib/function.js');
+      const { updateSettings } = await import('../../../lib/function.cjs');
       const settingsPath = path.join(process.cwd(), 'settings.cjs');
       if (args[0]?.toLowerCase() == 'neo') {
         if (!args[1]?.startsWith('nsk_')) return message.reply('Apikey Tidak Valid!\nAmbil Apikey di : https://app.neosantara.xyz/api-keys');
@@ -163,7 +163,7 @@ export const commands: PluginCommand[] = [
     handler: async ({ message, text }) => {
       if (text || message.quoted) {
         const teksnya = text ? text : message.quoted.text;
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, addPrefix: teksnya.trim() });
         message.reply('Selesai!');
@@ -179,7 +179,7 @@ export const commands: PluginCommand[] = [
     handler: async ({ message, text }) => {
       if (text || message.quoted) {
         const teksnya = text ? text : message.quoted.text;
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, removePrefix: teksnya.trim() });
         message.reply('Selesai!');
@@ -195,7 +195,7 @@ export const commands: PluginCommand[] = [
     handler: async ({ message, text }) => {
       if (text || message.quoted) {
         const teksnya = text ? text : message.quoted.text;
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, addBadword: teksnya.trim() });
         message.reply('Selesai!');
@@ -211,7 +211,7 @@ export const commands: PluginCommand[] = [
     handler: async ({ message, text }) => {
       if (text || message.quoted) {
         const teksnya = text ? text : message.quoted.text;
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
         await updateSettings({ filePath: settingsPath, removeBadword: teksnya.trim() });
         message.reply('Selesai!');

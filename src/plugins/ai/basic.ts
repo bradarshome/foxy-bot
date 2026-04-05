@@ -13,7 +13,7 @@ export const commands: PluginCommand[] = [
         const hasil = await (global as any).fetchApi('/ai/gemini-flash-lite', { query: text });
         message.reply(hasil.result.text);
       } catch {
-        const { pickRandom } = await import('../../../lib/function.js');
+        const { pickRandom } = await import('../../../lib/function.cjs');
         message.reply(pickRandom(['Fitur Ai sedang bermasalah!', 'Tidak dapat terhubung ke ai!', 'Sistem Ai sedang sibuk sekarang!', 'Fitur sedang tidak dapat digunakan!']));
       }
     },

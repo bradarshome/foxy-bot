@@ -19,7 +19,7 @@ export const commands: PluginCommand[] = [
         if (!/text|json|html|plain/.test(res.headers['content-type'])) {
           await message.reply(text);
         } else message.reply(JSON.stringify(res.data, null, 2));
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch (e: any) {
         message.reply(String(e));
@@ -36,7 +36,7 @@ export const commands: PluginCommand[] = [
       message.react('⏳');
       const media = await socket.downloadAndSaveMediaMessage(message.quoted.msg || message.quoted);
       try {
-        const { toAudio } = await import('../../../lib/converter.js');
+        const { toAudio } = await import('../../../lib/converter.cjs');
         const audio = await toAudio(media, 'mp4');
         await message.reply({ audio: { url: audio }, mimetype: 'audio/mpeg' });
       } finally {
@@ -53,7 +53,7 @@ export const commands: PluginCommand[] = [
       message.react('⏳');
       const media = await socket.downloadAndSaveMediaMessage(message.quoted.msg || message.quoted);
       try {
-        const { toAudio } = await import('../../../lib/converter.js');
+        const { toAudio } = await import('../../../lib/converter.cjs');
         const audio = await toAudio(media, 'mp4');
         await message.reply({ document: { url: audio }, mimetype: 'audio/mpeg', fileName: 'Convert By Foxy Bot.mp3' });
       } finally {
@@ -71,7 +71,7 @@ export const commands: PluginCommand[] = [
       message.react('⏳');
       const media = await socket.downloadAndSaveMediaMessage(message.quoted.msg || message.quoted);
       try {
-        const { toPTT } = await import('../../../lib/converter.js');
+        const { toPTT } = await import('../../../lib/converter.cjs');
         const audioBuffer = await toPTT(media, 'mp4');
         await message.reply({ audio: audioBuffer, mimetype: 'audio/ogg; codecs=opus', ptt: true });
       } finally {
@@ -87,7 +87,7 @@ export const commands: PluginCommand[] = [
       if (!/webp|video/.test(message.mime || '')) return message.reply(`Reply Video/Stiker dengan caption *${message.prefix + message.command}*`);
       message.react('⏳');
       const media = await socket.downloadAndSaveMediaMessage(message.quoted.msg || message.quoted);
-      const { getRandom, pickRandom } = await import('../../../lib/function.js');
+      const { getRandom, pickRandom } = await import('../../../lib/function.cjs');
       const ran = `./database/temp/${getRandom('.mp4')}`;
       exec(`ffmpeg -y -i "${media}" -an -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -pix_fmt yuv420p -c:v libx264 -preset veryfast "${ran}"`, async (err) => {
         try {
@@ -109,7 +109,7 @@ export const commands: PluginCommand[] = [
       if (!/webp|video|image/.test(message.mime || '')) return message.reply(`Reply Video/Stiker dengan caption *${message.prefix + message.command}*`);
       message.react('⏳');
       const media = await socket.downloadAndSaveMediaMessage(message.quoted.msg || message.quoted);
-      const { getRandom } = await import('../../../lib/function.js');
+      const { getRandom } = await import('../../../lib/function.cjs');
       const ran = `./database/temp/${getRandom('.png')}`;
       exec(`ffmpeg -y -i "${media}" -vframes 1 "${ran}"`, async (err) => {
         try {
@@ -151,7 +151,7 @@ export const commands: PluginCommand[] = [
         message.react('⏳');
         const media = await socket.downloadAndSaveMediaMessage(message.quoted.msg || message.quoted);
         try {
-          const { UguuSe } = await import('../../../lib/uploader.js');
+          const { UguuSe } = await import('../../../lib/uploader.cjs');
           const anu = await UguuSe(media);
           message.reply('Url : ' + anu.url);
         } finally {
@@ -195,7 +195,7 @@ export const commands: PluginCommand[] = [
       try {
         const anu = await (global as any).fetchApi('/tools/to-qr', { data: text }, { stream: true });
         await message.reply({ image: { url: anu }, caption: 'Nih Bro' });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } finally {}
     },
@@ -215,17 +215,17 @@ export const commands: PluginCommand[] = [
         form.append('buffer', fs.createReadStream(media), { filename: 'image.jpg', contentType: 'image/jpeg' });
         const hasil = await (global as any).fetchApi('/tools/remini', form, { stream: true });
         await message.reply({ image: { url: hasil }, caption: 'Selesai!' });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
-        const { getRandom } = await import('../../../lib/function.js');
+        const { getRandom } = await import('../../../lib/function.cjs');
         const ran = `./database/temp/${getRandom('.jpg')}`;
         const scaleFactor = isNaN(parseInt(text)) ? 4 : parseInt(text) < 10 ? parseInt(text) : 4;
         exec(`ffmpeg -i "${media}" -vf "scale=iw*${scaleFactor}:ih*${scaleFactor}:flags=lanczos" -q:v 1 "${ran}"`, async (err) => {
           try {
             if (err) return message.reply('Gagal!');
             await message.reply({ image: { url: ran }, caption: 'Selesai!' });
-            const { setLimit } = await import('../../../lib/game.js');
+            const { setLimit } = await import('../../../lib/game.cjs');
             setLimit(message, db);
           } finally {
             if (fs.existsSync(ran)) fs.unlinkSync(ran);
@@ -251,7 +251,7 @@ export const commands: PluginCommand[] = [
         form.append('buffer', fs.createReadStream(media), { filename: 'image.jpg', contentType: 'image/jpeg' });
         const hasil = await (global as any).fetchApi('/tools/recolor', form, { stream: true });
         await message.reply({ image: { url: hasil }, caption: 'Selesai!' });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } finally {
         if (fs.existsSync(media)) fs.unlinkSync(media);
@@ -273,7 +273,7 @@ export const commands: PluginCommand[] = [
         form.append('buffer', fs.createReadStream(media), { filename: 'image.jpg', contentType: 'image/jpeg' });
         const hasil = await (global as any).fetchApi('/create/skin-tone', form, { stream: true });
         message.reply({ image: { url: hasil }, caption: 'Selesai!' });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } finally {
         if (fs.existsSync(media)) fs.unlinkSync(media);
@@ -292,7 +292,7 @@ export const commands: PluginCommand[] = [
       try {
         const hasil = await (global as any).fetchApi('/tools/ss', { url: anu }, { stream: true });
         await message.reply({ image: { url: hasil }, caption: 'Selesai!' });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } finally {}
     },
@@ -377,11 +377,11 @@ export const commands: PluginCommand[] = [
       const bawah = text.split('|')[1] || '-';
       const media = await socket.downloadAndSaveMediaMessage(message.quoted.msg || message.quoted);
       try {
-        const { UguuSe } = await import('../../../lib/uploader.js');
+        const { UguuSe } = await import('../../../lib/uploader.cjs');
         const mem = await UguuSe(media);
         const smeme = await (global as any).fetchApi('/create/meme2', { url: mem.url, text: atas, text2: bawah }, { stream: true });
         await socket.sendAsSticker(message.chat, smeme, message, { packname: db?.packname, author: db?.author });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');
@@ -404,7 +404,7 @@ export const commands: PluginCommand[] = [
       for (const res of result) {
         await socket.sendAsSticker(message.chat, res.url, message, { packname: db?.packname, author: db?.author });
       }
-      const { setLimit } = await import('../../../lib/game.js');
+      const { setLimit } = await import('../../../lib/game.cjs');
       setLimit(message, db);
     },
   },
@@ -421,7 +421,7 @@ export const commands: PluginCommand[] = [
       try {
         const res = await (global as any).fetchApi('/create/iqc', { text: queryText }, { stream: true });
         await message.reply({ image: { url: res }, caption: 'Selesai!' });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } finally {}
     },
@@ -444,12 +444,12 @@ export const commands: PluginCommand[] = [
         const quotedName = (message.quoted?.sender || '').split('@')[0];
         if (message.isMedia) {
           mediaPath = await socket.downloadAndSaveMediaMessage(message.msg || message);
-          const { UguuSe } = await import('../../../lib/uploader.js');
+          const { UguuSe } = await import('../../../lib/uploader.cjs');
           medianya = await UguuSe(mediaPath);
         }
         if (message.quoted?.isMedia) {
           quotedMediaPath = await socket.downloadAndSaveMediaMessage(message.quoted.msg || message.quoted);
-          const { UguuSe } = await import('../../../lib/uploader.js');
+          const { UguuSe } = await import('../../../lib/uploader.cjs');
           quotedMedianya = await UguuSe(quotedMediaPath);
         }
         const payload = {
@@ -475,7 +475,7 @@ export const commands: PluginCommand[] = [
         };
         const res = await (global as any).fetchApi('/create/qc', payload, { method: 'POST', buffer: true });
         await socket.sendAsSticker(message.chat, Buffer.from(res, 'base64'), message, { packname: db?.packname, author: db?.author });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');
@@ -497,13 +497,13 @@ export const commands: PluginCommand[] = [
       try {
         const res = await (global as any).fetchApi('/create/brat', { text: queryText }, { stream: true });
         await socket.sendAsSticker(message.chat, res, message);
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         try {
           const res = await (global as any).fetchApi('/create/brat3', { text: queryText }, { stream: true });
           await socket.sendAsSticker(message.chat, res, message);
-          const { setLimit } = await import('../../../lib/game.js');
+          const { setLimit } = await import('../../../lib/game.cjs');
           setLimit(message, db);
         } catch {
           message.reply('Gagal!');
@@ -548,7 +548,7 @@ export const commands: PluginCommand[] = [
         const { execSync } = await import('child_process');
         execSync(`ffmpeg -y -f concat -safe 0 -i "${fileListPath}" -vf 'fps=30' -c:v libx264 -preset veryfast -pix_fmt yuv420p -t 00:00:10 "${outputVideoPath}"`);
         await socket.sendAsSticker(message.chat, outputVideoPath, message, { packname: db?.packname, author: db?.author });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');
@@ -573,7 +573,7 @@ export const commands: PluginCommand[] = [
         form.append('buffer', fs.createReadStream(media), { filename: 'image.jpg', contentType: 'image/jpeg' });
         const hasil = await (global as any).fetchApi('/create/wasted', form, { stream: true });
         await socket.sendMedia(message.chat, hasil, '', 'Nih Bro', message);
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } finally {
         if (fs.existsSync(media)) fs.unlinkSync(media);
@@ -595,7 +595,7 @@ export const commands: PluginCommand[] = [
         form.append('buffer', fs.createReadStream(media), { filename: 'image.jpg', contentType: 'image/jpeg' });
         const hasil = await (global as any).fetchApi('/create/triggered', form, { stream: true });
         await socket.sendMedia(message.chat, hasil, '', 'Selesai!', message);
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } finally {
         if (fs.existsSync(media)) fs.unlinkSync(media);
@@ -624,7 +624,7 @@ export const commands: PluginCommand[] = [
       try {
         const hasil = await (global as any).fetchApi('/create/nulis/' + message.command, { text: fixHeight }, { stream: true });
         await message.reply({ image: { url: hasil }, caption: 'Jangan Malas Lord. Jadilah siswa yang rajin' });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } finally {}
     },
@@ -651,7 +651,7 @@ export const commands: PluginCommand[] = [
       if (/audio/.test(message.mime || '')) {
         message.react('⏳');
         const media = await socket.downloadAndSaveMediaMessage(message.quoted.msg || message.quoted);
-        const { getRandom } = await import('../../../lib/function.js');
+        const { getRandom } = await import('../../../lib/function.cjs');
         const ran = `./database/temp/${getRandom('.mp3')}`;
         exec(`ffmpeg -i "${media}" ${set} "${ran}"`, async (err) => {
           try {
@@ -676,7 +676,7 @@ export const commands: PluginCommand[] = [
       if (!text || !isUrl.test(text)) return message.reply(`Example: ${message.prefix + message.command} https://github.com`);
       const hasil = await (global as any).fetchApi('/other/tinyurl', { url: text });
       message.reply('Url : ' + hasil.result);
-      const { setLimit } = await import('../../../lib/game.js');
+      const { setLimit } = await import('../../../lib/game.cjs');
       setLimit(message, db);
     },
   },
@@ -693,7 +693,7 @@ export const commands: PluginCommand[] = [
       const [, user, repo] = args[0].match(/(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i) || [];
       try {
         message.reply({ document: { url: `https://api.github.com/repos/${user}/${repo}/zipball` }, fileName: repo + '.zip', mimetype: 'application/zip' }).catch(() => message.reply('Gagal!'));
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');

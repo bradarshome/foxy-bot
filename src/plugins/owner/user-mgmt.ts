@@ -75,7 +75,7 @@ export const commands: PluginCommand[] = [
         if (set.owner.find((a: string) => nmrnya.includes(a))) return message.reply('Nomer Tersebut Sudah Ada Di Owner!');
         set.owner.push(nmrnya.split('@')[0]);
         const settingsPath = path.join(process.cwd(), 'settings.cjs');
-        const { updateSettings } = await import('../../../lib/function.js');
+        const { updateSettings } = await import('../../../lib/function.cjs');
         await updateSettings({ filePath: settingsPath, owner: set.owner });
       }
       message.reply('Selesai!');
@@ -99,7 +99,7 @@ export const commands: PluginCommand[] = [
       if (index === -1) return message.reply('Owner tidak ditemukan di daftar!');
       list.splice(index, 1);
       const settingsPath = path.join(process.cwd(), 'settings.cjs');
-      const { updateSettings } = await import('../../../lib/function.js');
+      const { updateSettings } = await import('../../../lib/function.cjs');
       await updateSettings({ filePath: settingsPath, owner: set.owner });
       message.reply('Selesai!');
     },
@@ -119,7 +119,7 @@ export const commands: PluginCommand[] = [
       const onWa = await socket.onWhatsApp(nmrnya);
       if (!onWa.length > 0) return message.reply('Nomor tersebut tidak terdaftar di WhatsApp!');
       if (db.users[nmrnya] && db.users[nmrnya].money >= 0) {
-        const { addMoney } = await import('../../../lib/game.js');
+        const { addMoney } = await import('../../../lib/game.cjs');
         addMoney(args[1], nmrnya, db);
         message.reply('Selesai!');
       } else message.reply('User tidak terdaftar di database!');
@@ -139,7 +139,7 @@ export const commands: PluginCommand[] = [
       const onWa = await socket.onWhatsApp(nmrnya);
       if (!onWa.length > 0) return message.reply('Nomor tersebut tidak terdaftar di WhatsApp!');
       if (db.users[nmrnya] && db.users[nmrnya].limit >= 0) {
-        const { addLimit } = await import('../../../lib/game.js');
+        const { addLimit } = await import('../../../lib/game.cjs');
         addLimit(args[1], nmrnya, db);
         message.reply('Selesai!');
       } else message.reply('User tidak terdaftar di database!');

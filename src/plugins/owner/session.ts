@@ -10,7 +10,7 @@ export const commands: PluginCommand[] = [
     category: 'Owner',
     ownerOnly: true,
     handler: async ({ message, args, db }) => {
-      const { tarBackup } = await import('../../../lib/function.js');
+      const { tarBackup } = await import('../../../lib/function.cjs');
       const tempatDB = db?.tempatDB || 'database.json';
       switch (args[0]) {
         case 'all': {
@@ -77,7 +77,7 @@ export const commands: PluginCommand[] = [
     category: 'Owner',
     ownerOnly: true,
     handler: async ({ message, text }) => {
-      const { sleep } = await import('../../../lib/function.js');
+      const { sleep } = await import('../../../lib/function.cjs');
       fs.readdir('./foxy-session', async function (err, files) {
         if (err) {
           console.error('Unable to scan directory: ' + err);
@@ -107,7 +107,7 @@ export const commands: PluginCommand[] = [
     category: 'Owner',
     ownerOnly: true,
     handler: async ({ message, text }) => {
-      const { sleep } = await import('../../../lib/function.js');
+      const { sleep } = await import('../../../lib/function.cjs');
       fs.readdir('./database/temp', async function (err, files) {
         if (err) {
           console.error('Unable to scan directory: ' + err);

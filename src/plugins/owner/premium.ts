@@ -59,7 +59,7 @@ export const commands: PluginCommand[] = [
     category: 'Owner',
     ownerOnly: true,
     handler: async ({ message, db }) => {
-      const { formatDate } = await import('../../../lib/function.js');
+      const { formatDate } = await import('../../../lib/function.cjs');
       let txt = '*------「 LIST SEWA 」------*\n\n';
       for (const s of db.sewa) {
         txt += `➸ *ID*: ${s.id}\n➸ *Url*: https://chat.whatsapp.com/${s.url}\n➸ *Expired*: ${formatDate(s.expired)}\n\n`;
@@ -126,7 +126,7 @@ export const commands: PluginCommand[] = [
     category: 'Owner',
     ownerOnly: true,
     handler: async ({ message, db }) => {
-      const { formatDate } = await import('../../../lib/function.js');
+      const { formatDate } = await import('../../../lib/function.cjs');
       let txt = '*------「 LIST PREMIUM 」------*\n\n';
       for (const userprem of db.premium) {
         txt += `➸ *Nomer*: @${userprem.id.split('@')[0]}\n➸ *Limit*: ${db.users[userprem.id].limit}\n➸ *Money*: ${db.users[userprem.id].money.toLocaleString('id-ID')}\n➸ *Expired*: ${formatDate(userprem.expired)}\n\n`;

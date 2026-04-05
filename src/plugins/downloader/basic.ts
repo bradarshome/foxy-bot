@@ -14,7 +14,7 @@ export const commands: PluginCommand[] = [
       if (!text.includes('youtu')) return message.reply('Url Tidak Mengandung Result Dari Youtube!');
       message.react('⏳');
       try {
-        const { ytMp3 } = await import('../../../lib/scraper.js');
+        const { ytMp3 } = await import('../../../lib/scraper.cjs');
         const hasil = await ytMp3(text);
         await message.reply({
           audio: { url: hasil.result },
@@ -31,7 +31,7 @@ export const commands: PluginCommand[] = [
             },
           },
         });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         try {
@@ -51,7 +51,7 @@ export const commands: PluginCommand[] = [
               },
             },
           });
-          const { setLimit } = await import('../../../lib/game.js');
+          const { setLimit } = await import('../../../lib/game.cjs');
           setLimit(message, db);
         } catch {
           message.reply('Gagal!');
@@ -71,17 +71,17 @@ export const commands: PluginCommand[] = [
       message.react('⏳');
       let videoPath: string | null = null;
       try {
-        const { ytMp4 } = await import('../../../lib/scraper.js');
+        const { ytMp4 } = await import('../../../lib/scraper.cjs');
         const hasil = await ytMp4(text);
         videoPath = hasil.result;
         await message.reply({ video: { url: videoPath }, caption: `*📍Title:* ${hasil.title}\n*✏Description:* ${hasil.desc ? hasil.desc : ''}\n*🚀Channel:* ${hasil.channel}\n*🗓Upload at:* ${hasil.uploadDate}` });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         try {
           const { result: hasil } = await (global as any).fetchApi('/download/youtube', { url: text, format: '360' });
           await message.reply({ video: { url: hasil.download }, caption: `*📍Title:* ${hasil.title}\n*✏Quality:* ${hasil.quality ? hasil.quality : ''}\n*⏳Duration:* ${hasil.duration}` });
-          const { setLimit } = await import('../../../lib/game.js');
+          const { setLimit } = await import('../../../lib/game.cjs');
           setLimit(message, db);
         } catch {
           message.reply('Gagal!');
@@ -113,7 +113,7 @@ export const commands: PluginCommand[] = [
         } else if (hasil.result?.urls?.length == 1) {
           message.reply({ image: { url: hasil.result.urls[0].url }, caption: hasil.result.caption });
         } else message.reply('Postingan Tidak Tersedia atau Privat!');
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');
@@ -142,7 +142,7 @@ export const commands: PluginCommand[] = [
         } else {
           return message.reply('Url Tidak Valid!');
         }
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');
@@ -176,7 +176,7 @@ export const commands: PluginCommand[] = [
             },
           },
         });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');
@@ -197,7 +197,7 @@ export const commands: PluginCommand[] = [
         if (!hasil.result.hd && !hasil.result.sd) return message.reply('Video Tidak ditemukan!');
         message.react('⏳');
         await socket.sendFileUrl(message.chat, hasil.result.hd || hasil.result.sd, `*🎐Title:* ${hasil.result.title}`, message);
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');
@@ -219,7 +219,7 @@ export const commands: PluginCommand[] = [
         const listv = db?.listv || ['•'];
         const setv = listv[Math.floor(Math.random() * listv.length)];
         await socket.sendMedia(message.chat, res.link, res.filename, `*MEDIAFIRE DOWNLOADER*\n\n*${setv} Name* : ${res.filename}\n*${setv} Size* : ${res.size}`, message);
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');
@@ -255,7 +255,7 @@ export const commands: PluginCommand[] = [
             },
           },
         });
-        const { setLimit } = await import('../../../lib/game.js');
+        const { setLimit } = await import('../../../lib/game.cjs');
         setLimit(message, db);
       } catch {
         message.reply('Gagal!');
