@@ -256,6 +256,8 @@ export async function serializeMessage(socket: WASocket, store: any): Promise<WA
   s.sendButtonMsg = async (jid: string, content: any, options = {}) => {
     const { text, caption, footer = '', buttons = [], mentions = [], contextInfo = {} } = content;
     
+    const hasNativeFlow = buttons.some((btn: any) => btn.nativeFlowInfo);
+    
     const msg: any = await generateWAMessageFromContent(jid, {
       viewOnceMessage: {
         message: {
@@ -278,9 +280,28 @@ export async function serializeMessage(socket: WASocket, store: any): Promise<WA
       }
     }, {});
     
-    return socket.sendMessage(jid, msg.message, {
-      quoted: options.quoted,
-      messageId: msg.key.id
+    const additionalNodes = hasNativeFlow ? [{
+      tag: 'biz',
+      attrs: {},
+      content: [{
+        tag: 'interactive',
+        attrs: {
+          type: 'native_flow',
+          v: '1'
+        },
+        content: [{
+          tag: 'native_flow',
+          attrs: {
+            v: '9',
+            name: 'mixed'
+          }
+        }]
+      }]
+    }] : [];
+    
+    return socket.relayMessage(jid, msg.message, {
+      messageId: msg.key.id,
+      additionalNodes
     });
   };
 
