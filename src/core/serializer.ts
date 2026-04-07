@@ -481,7 +481,30 @@ async function serializeMessageObject(socket: WASocket, msg: any, store: any): P
     m.type = getContentType(m.message) || Object.keys(m.message)[0];
     m.msg = extractMessageContent(m.message[m.type]) || m.message[m.type];
     m.mentionedJid = m.msg?.contextInfo?.mentionedJid?.map((a: string) => s.findJidByLid(a, store, true)) || [];
-    m.text = m.msg?.text || m.msg?.caption || m.message?.conversation || m.msg?.contentText || m.msg?.selectedDisplayText || m.msg?.title || '';
+    
+    // Handle button response, list response, and native flow response
+    if (m.type === 'buttonsResponseMessage') {
+      m.text = m.msg?.selectedButtonId || '';
+    } else if (m.type === 'listResponseMessage') {
+      m.text = m.msg?.singleSelectReply?.selectedRowId || '';
+    } else if (m.type === 'templateButtonReplyMessage') {
+      m.text = m.msg?.selectedId || '';
+    } else if (m.type === 'interactiveResponseMessage') {
+      const nativeFlowResponse = m.msg?.nativeFlowResponseMessage;
+      if (nativeFlowResponse) {
+        try {
+          const params = JSON.parse(nativeFlowResponse.paramsJson);
+          m.text = params.id || '';
+        } catch {
+          m.text = '';
+        }
+      } else {
+        m.text = m.msg?.selectedButtonId || m.msg?.singleSelectReply?.selectedRowId || '';
+      }
+    } else {
+      m.text = m.msg?.text || m.msg?.caption || m.message?.conversation || m.msg?.contentText || m.msg?.selectedDisplayText || m.msg?.title || '';
+    }
+    
     m.isMedia = !!m.msg?.mimetype || !!m.msg?.thumbnailDirectPath;
 
     if (m.isMedia) {
