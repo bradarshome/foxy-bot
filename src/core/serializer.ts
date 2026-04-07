@@ -8,6 +8,8 @@ import {
   jidDecode,
   getContentType,
   type WASocket,
+  generateWAMessageFromContent,
+  proto,
 } from 'baileys';
 import axios from 'axios';
 import { fileTypeFromBuffer, fileTypeFromFile } from 'file-type';
@@ -252,21 +254,34 @@ export async function serializeMessage(socket: WASocket, store: any): Promise<WA
 
   // Send button message
   s.sendButtonMsg = async (jid: string, content: any, options = {}) => {
-    const { text, footer, buttons, contextInfo, mentions } = content;
-    const buttonRows = (buttons || []).map((btn: any, i: number) => ({
-      buttonId: btn.buttonId || btn.id || `btn_${i}`,
-      buttonText: { displayText: btn.buttonText?.displayText || btn.title || `Button ${i + 1}` },
-      type: btn.type || 1,
-      ...(btn.nativeFlowInfo ? { nativeFlowInfo: btn.nativeFlowInfo } : {}),
-    }));
-    return socket.sendMessage(jid, {
-      text,
-      footer,
-      buttons: buttonRows,
-      headerType: 1,
-      viewOnce: true,
-      contextInfo: { mentionedJid: mentions || [], ...contextInfo },
-    }, { quoted: options.quoted });
+    const { text, caption, footer = '', buttons = [], mentions = [], contextInfo = {} } = content;
+    
+    const msg: any = await generateWAMessageFromContent(jid, {
+      viewOnceMessage: {
+        message: {
+          messageContextInfo: {
+            deviceListMetadata: {},
+            deviceListMetadataVersion: 2,
+          },
+          buttonsMessage: {
+            contentText: text || caption || '',
+            footerText: footer,
+            buttons: buttons,
+            headerType: 1,
+            contextInfo: {
+              ...contextInfo,
+              ...options.contextInfo,
+              mentionedJid: options.mentions || mentions,
+            }
+          }
+        }
+      }
+    }, {});
+    
+    return socket.sendMessage(jid, msg.message, {
+      quoted: options.quoted,
+      messageId: msg.key.id
+    });
   };
 
   // Send list message
