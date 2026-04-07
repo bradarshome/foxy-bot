@@ -254,10 +254,10 @@ export async function serializeMessage(socket: WASocket, store: any): Promise<WA
   s.sendButtonMsg = async (jid: string, content: any, options = {}) => {
     const { text, footer, buttons, contextInfo, mentions } = content;
     const buttonRows = (buttons || []).map((btn: any, i: number) => ({
-      header: '',
-      title: btn.buttonText?.displayText || btn.title || `Button ${i + 1}`,
-      id: btn.buttonId || btn.id || `btn_${i}`,
+      buttonId: btn.buttonId || btn.id || `btn_${i}`,
+      buttonText: { displayText: btn.buttonText?.displayText || btn.title || `Button ${i + 1}` },
       type: btn.type || 1,
+      ...(btn.nativeFlowInfo ? { nativeFlowInfo: btn.nativeFlowInfo } : {}),
     }));
     return socket.sendMessage(jid, {
       text,
